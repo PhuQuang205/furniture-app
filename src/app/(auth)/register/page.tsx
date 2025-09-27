@@ -4,10 +4,11 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 import { FurnitureLogo } from "@/components/furniture-logo";
 import { useState } from "react";
 
-const LoginPage = () => {
+export const RegisterPage = () => {
 	const [showPassword, setShowPassword] = useState(false);
 
 	return (
@@ -18,15 +19,46 @@ const LoginPage = () => {
 				</div>
 
 				<div className="space-y-3">
-					<h1 className="text-4xl font-semibold text-gray-900">Đăng nhập</h1>
+					<h1 className="text-4xl font-semibold text-black">Đăng ký</h1>
 					<p className="text-sm text-black">
-						Vui lòng điền thông tin chi tiết của bạn để truy cập tài khoản.
+						Điền thông tin của bạn phía bên dưới hoặc tài khoản google.
 					</p>
 				</div>
 
 				<form className="space-y-6">
+					<div className="grid grid-cols-2 gap-4">
+						<div className="space-y-2">
+							<Label
+								htmlFor="firstName"
+								className="text-md font-semibold text-black"
+							>
+								Họ
+							</Label>
+							<Input
+								id="firstName"
+								type="text"
+								placeholder="Nhập họ"
+								className="h-12 border-gray-300 px-5"
+							/>
+						</div>
+						<div className="space-y-2">
+							<Label
+								htmlFor="lastName"
+								className="text-md font-semibold text-black"
+							>
+								Tên
+							</Label>
+							<Input
+								id="lastName"
+								type="text"
+								placeholder="Nhập tên"
+								className="h-12 px-5 border-gray-300"
+							/>
+						</div>
+					</div>
+
 					<div className="space-y-2">
-						<Label htmlFor="email" className="text-md font-semibold text-black">
+						<Label htmlFor="email" className="text-md text-black font-semibold">
 							Email
 						</Label>
 						<Input
@@ -40,7 +72,7 @@ const LoginPage = () => {
 					<div className="space-y-2">
 						<Label
 							htmlFor="password"
-							className="text-md font-semibold text-black"
+							className="text-md text-black font-semibold"
 						>
 							Mật khẩu
 						</Label>
@@ -49,33 +81,38 @@ const LoginPage = () => {
 								id="password"
 								type={showPassword ? "text" : "password"}
 								placeholder="Nhập mật khẩu"
-								className="h-12 px-5 border-gray-300"
+								className="h-12 pr-10 border-gray-300 px-5"
 							/>
 						</div>
 					</div>
 
-					<div className="flex items-center justify-between">						
-						<Link
-							href="/forgot-password"
-							className="text-sm font-medium text-greenly underline underline-offset-4"
+					<div className="flex items-start space-x-2">
+						<Checkbox id="terms" className="size-5 border-gray-300" />
+						<Label
+							htmlFor="terms"
+							className="text-sm text-black leading-relaxed"
 						>
-							Quên mật khẩu?
-						</Link>
+							Đồng ý với{" "}
+							<Link href="/terms" className="underline underline-offset-4">
+								Điều khoản
+							</Link>{" "}
+							và{" "}
+							<Link href="/privacy" className="underline underline-offset-4">
+								Chính sách bảo mật
+							</Link>
+						</Label>
 					</div>
 
 					<div className="flex flex-col">
 						<Button className="bg-greenly mb-6 h-12 text-md cursor-pointer hover:bg-greenly/90">
-							Đăng nhập
+							<Link href="/complete-profile" className="size-">Đăng ký</Link>
 						</Button>
-
-						<div className="text-center">
-							<div className="flex items-center my-6">
-								<div className="flex-grow border-t border-gray-300"></div>
-								<span className="mx-4 text-black text-sm">
-									hoặc đăng nhập với
-								</span>
-								<div className="flex-grow border-t border-gray-300"></div>
-							</div>
+						<div className="flex items-center my-6">
+							<div className="flex-grow border-t border-gray-300"></div>
+							<span className="mx-4 text-gray-500 text-sm">
+								hoặc đăng ký với
+							</span>
+							<div className="flex-grow border-t border-gray-300"></div>
 						</div>
 
 						<Button
@@ -101,18 +138,18 @@ const LoginPage = () => {
 									d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
 								/>
 							</svg>
-							Đăng nhập bằng Google
+							Đăng ký bằng Google
 						</Button>
 					</div>
 
 					<div className="text-center">
-						<span className="text-sm text-black">
-							Chưa có tài khoản? {" "}
+						<span className="text-sm text-gray-600">
+							Đã có tài khoản?{" "}
 							<Link
-								href="/register"
-								className="text-greenly underline underline-offset-4 font-medium"
+								href="/login"
+								className="text-md text-greenly underline underline-offset-4"
 							>
-								Đăng ký
+								Đăng nhập
 							</Link>
 						</span>
 					</div>
@@ -122,4 +159,4 @@ const LoginPage = () => {
 	);
 };
 
-export default LoginPage;
+export default RegisterPage;
