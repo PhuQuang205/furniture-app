@@ -7,7 +7,7 @@ interface TestimonialCardProps {
 export function TestimonialCard({ quote, name, title }: TestimonialCardProps) {
     return (
         <div className="absolute bottom-6 left-6 right-6 bg-black/80 backdrop-blur-sm rounded-lg p-6 text-white">
-            <blockquote className="text-sm leading-relaxed mb-4">"{quote}"</blockquote>
+            {/* <blockquote className="text-sm leading-relaxed mb-4">"{quote}"</blockquote> */}
             <div>
                 <div className="font-semibold">{name}</div>
                 <div className="text-sm text-gray-300">{title}</div>

@@ -48,8 +48,8 @@ export const BannerSection = () => {
 
 	return (
 		<section className="relative bg-subbg py-16 lg:py-24">
-			<div className="container mx-auto px-8 lg:px-0">
-				<div className="flex flex-col lg:flex-row justify-between gap-16">
+			<div className="container mx-auto px-8 lg:px-4">
+				<div className="flex flex-col lg:flex-row justify-between gap-16 overflow-hidden">
 					<div className="space-y-8">
 						<div className="space-y-6">
 							<div className="inline-flex items-center px-4 py-2 rounded-full bg-white gap-2 ">
@@ -139,9 +139,9 @@ export const BannerSection = () => {
 								>
 									{furnitureCategories.map((category) => (
 										<SwiperSlide key={category.id}>
-											<div className="relative rounded-xl bg-white border-2 border-gray-300">
+											<div className="relative rounded-xl bg-white border-2 border-gray-300 ">
 												{/* Ảnh */}
-												<div className="flex-none overflow-hidden">
+												<div className="flex-none">
 													<div className="overflow-hidden p-2">
 														<Image
 															src={category.image}

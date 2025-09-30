@@ -4,9 +4,9 @@ import Image from "next/image";
 
 export const CommitSection = () => {
 	return (
-		<div className="container mx-auto px-8 lg:px-0">
-			<div className="py-8 lg:py-16">
-				<div className="flex items-center justify-center gap-12">
+		<div className="container mx-auto">
+			<div className="py-8 lg:py-16 px-8 lg:px-4">
+				<div className="flex items-center justify-between gap-12">
 					{FEATURES.map((item) => (
 						<div key={item.id} className="text-black flex flex-col lg:flex-row gap-2 items-center">
 							<div>
@@ -15,7 +15,7 @@ export const CommitSection = () => {
 									alt={item.title}
 									width={500}
 									height={500}
-									className="size-12"
+									className="size-15"
 								/>
 							</div>
 							<div className="space-y-1 max-lg:text-center">
