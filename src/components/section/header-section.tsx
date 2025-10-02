@@ -8,7 +8,7 @@ import {NAV_LINK} from "@/context/index"
 export const HeaderSection = () => {
 	return (
 		<section className="container mx-auto">
-			<div className="flex items-center justify-between py-4 px-8 lg:px-4">
+			<div className="flex items-center justify-between py-4 lg:py-8 px-8 lg:px-4">
 				<div className="text-white text-sm">
 					<FurnitureLogo active={false}/>
 				</div>

@@ -6,9 +6,6 @@ export const TextRunSection = () => {
 		<div className="container mx-auto">
 			<div className="px-8 lg:px-4">
 				<div className="py-4 lg:py-8 flex flex-col items-center gap-2">
-					{/* <h1 className="text-4xl font-bold text-black">
-						Đối tác của Hoàng Hà
-					</h1> */}
 					<div className="flex justify-center items-center flex-col gap-4 my-4">
 						<div className="inline-flex items-center gap-2">
 							<div className="w-5 h-0.5 rounded-2xl bg-yelly" />

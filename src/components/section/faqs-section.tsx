@@ -5,39 +5,39 @@ import { useRef, useState, useEffect } from "react";
 const faqData = [
 	{
 		id: 0,
-		question: "What types of furniture do you offer?",
+		question: "Bạn cung cấp những loại nội thất nào?",
 		answer:
-			"+ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+			"+ Chúng tôi cung cấp đa dạng sản phẩm như bàn, ghế, tủ, giường, sofa và nhiều sản phẩm trang trí nội thất khác.",
 	},
 	{
 		id: 1,
-		question: "What payment methods do you accept?",
+		question: "Bạn chấp nhận những phương thức thanh toán nào?",
 		answer:
-			"+ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua eiusmod tempor incididunt ut labore et dolore magna aliqua",
+			"+ Chúng tôi chấp nhận thanh toán bằng tiền mặt khi nhận hàng (COD), chuyển khoản ngân hàng, và thẻ tín dụng/ghi nợ.",
 	},
 	{
 		id: 2,
-		question: "Can I track my furniture delivery?",
+		question: "Tôi có thể theo dõi đơn hàng nội thất của mình không?",
 		answer:
-			"+ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+			"+ Có, sau khi đặt hàng thành công, bạn sẽ nhận được mã vận đơn để theo dõi trạng thái giao hàng.",
 	},
 	{
 		id: 3,
-		question: "What is your return policy?",
+		question: "Chính sách đổi trả của cửa hàng là gì?",
 		answer:
-			"+ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+			"+ Bạn có thể đổi/trả sản phẩm trong vòng 7 ngày nếu sản phẩm bị lỗi từ nhà sản xuất hoặc không đúng mô tả.",
 	},
 	{
 		id: 4,
-		question: "What materials are used in your furniture?",
+		question: "Nội thất được làm từ những chất liệu gì?",
 		answer:
-			"+ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+			"+ Các sản phẩm nội thất được làm từ gỗ tự nhiên, gỗ công nghiệp, kim loại, kính và vải bọc cao cấp.",
 	},
 	{
 		id: 5,
-		question: "Are there any discounts or promotions available?",
+		question: "Hiện tại có chương trình khuyến mãi nào không?",
 		answer:
-			"+ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+			"+ Chúng tôi thường xuyên có các chương trình giảm giá, khuyến mãi theo mùa. Vui lòng xem chi tiết tại trang khuyến mãi.",
 	},
 ];
 
@@ -90,14 +90,14 @@ export const FaqsSection = () => {
 									return (
 										<div
 											key={faq.id}
-											className={`rounded-xl transition-all duration-500 border-2 border-gray-100 overflow-hidden ${
+											className={`rounded-xl cursor-pointer transition-all duration-500 border-2 border-gray-100 overflow-hidden ${
 												isOpen ? "bg-greenly" : "bg-white"
 											}`}
 										>
 											<button
 												onClick={() => toggleFaq(faq.id)}
 												className={`w-full px-6 py-5 text-left flex items-center justify-between transition-colors ${
-													isOpen ? "text-white" : "text-gray-900"
+													isOpen ? "text-yelly" : "text-gray-900"
 												}`}
 											>
 												<span className="text-lg font-medium pr-4">

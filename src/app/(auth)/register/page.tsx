@@ -6,16 +6,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { FurnitureLogo } from "@/components/furniture-logo";
-import { useState } from "react";
 
 export const RegisterPage = () => {
-	const [showPassword, setShowPassword] = useState(false);
-
 	return (
 		<div className="flex items-center justify-center p-8 bg-white">
 			<div className="w-full max-w-md space-y-8">
 				<div className="space-y-2">
-					<FurnitureLogo />
+					<FurnitureLogo active={false} />
 				</div>
 
 				<div className="space-y-3">
@@ -79,7 +76,7 @@ export const RegisterPage = () => {
 						<div className="relative">
 							<Input
 								id="password"
-								type={showPassword ? "text" : "password"}
+								type="password"
 								placeholder="Nhập mật khẩu"
 								className="h-12 pr-10 border-gray-300 px-5"
 							/>
@@ -105,7 +102,9 @@ export const RegisterPage = () => {
 
 					<div className="flex flex-col">
 						<Button className="bg-greenly mb-6 h-12 text-md cursor-pointer hover:bg-greenly/90">
-							<Link href="/complete-profile" className="size-">Đăng ký</Link>
+							<Link href="/complete-profile" className="size-">
+								Đăng ký
+							</Link>
 						</Button>
 						<div className="flex items-center my-6">
 							<div className="flex-grow border-t border-gray-300"></div>

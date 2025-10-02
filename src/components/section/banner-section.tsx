@@ -149,6 +149,7 @@ export const BannerSection = () => {
 															className="object-cover w-[400px] h-[300px] rounded-xl"
 															width={500}
 															height={300}
+															priority
 														/>
 													</div>
 													<div className="absolute top-4 right-4 bg-black/70 text-white px-3 py-1 rounded-full text-sm font-medium">

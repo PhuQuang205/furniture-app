@@ -1,12 +1,12 @@
-import { BannerSection } from "@/components/banner-section";
-import { BlogSection } from "@/components/blog-section";
-import { CommitSection } from "@/components/commit-section";
-import { FaqsSection } from "@/components/faqs-section";
-import { IntroCategorySection } from "@/components/intro-category-section";
-import { IntroProductSection } from "@/components/intro-product-section";
-import { TestimonialSection } from "@/components/testimonial-section";
-import { TextRunSection } from "@/components/text-run-section";
-import { TodayDealSection } from "@/components/today-deal-section";
+import { BannerSection } from "@/components/section/banner-section";
+import { BlogSection } from "@/components/section/blog-section";
+import { CommitSection } from "@/components/section/commit-section";
+import { FaqsSection } from "@/components/section/faqs-section";
+import { IntroCategorySection } from "@/components/section/intro-category-section";
+import { IntroProductSection } from "@/components/section/intro-product-section";
+import { TestimonialSection } from "@/components/section/testimonial-section";
+import { TextRunSection } from "@/components/section/text-run-section";
+import { TodayDealSection } from "@/components/section/today-deal-section";
 
 export default function Home() {
 	return (

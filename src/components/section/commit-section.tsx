@@ -15,12 +15,12 @@ export const CommitSection = () => {
 									alt={item.title}
 									width={500}
 									height={500}
-									className="size-15"
+									className="size-10 lg:size-15"
 								/>
 							</div>
-							<div className="space-y-1 max-lg:text-center">
-								<h1 className="font-bold text-lg max-md:text-sm max-sm:whitespace-nowrap">{item.title}</h1>
-								<p className="text-sm hidden lg:block">{item.description}</p>
+							<div className="max-lg:text-center">
+								<h1 className="font-bold text-lg max-md:text-sm">{item.title}</h1>
+								<p className="text-sm text-black/80 hidden lg:block">{item.description}</p>
 							</div>
 						</div>
 					))}

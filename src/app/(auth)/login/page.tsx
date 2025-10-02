@@ -5,16 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { FurnitureLogo } from "@/components/furniture-logo";
-import { useState } from "react";
 
 const LoginPage = () => {
-	const [showPassword, setShowPassword] = useState(false);
-
 	return (
 		<div className="flex items-center justify-center p-8 bg-white">
 			<div className="w-full max-w-md space-y-8">
 				<div className="space-y-2">
-					<FurnitureLogo />
+					<FurnitureLogo active={false} />
 				</div>
 
 				<div className="space-y-3">
@@ -47,14 +44,14 @@ const LoginPage = () => {
 						<div className="relative">
 							<Input
 								id="password"
-								type={showPassword ? "text" : "password"}
+								type="password"
 								placeholder="Nhập mật khẩu"
 								className="h-12 px-5 border-gray-300"
 							/>
 						</div>
 					</div>
 
-					<div className="flex items-center justify-between">						
+					<div className="flex items-center justify-between">
 						<Link
 							href="/forgot-password"
 							className="text-sm font-medium text-greenly underline underline-offset-4"
@@ -107,7 +104,7 @@ const LoginPage = () => {
 
 					<div className="text-center">
 						<span className="text-sm text-black">
-							Chưa có tài khoản? {" "}
+							Chưa có tài khoản?{" "}
 							<Link
 								href="/register"
 								className="text-greenly underline underline-offset-4 font-medium"
