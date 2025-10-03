@@ -62,7 +62,7 @@ const LoginPage = () => {
 
 					<div className="flex flex-col">
 						<Button className="bg-greenly mb-6 h-12 text-md cursor-pointer hover:bg-greenly/90">
-							Đăng nhập
+							<Link href="/">Đăng nhập</Link>
 						</Button>
 
 						<div className="text-center">
