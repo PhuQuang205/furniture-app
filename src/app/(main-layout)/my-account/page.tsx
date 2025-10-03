@@ -2,7 +2,9 @@
 import { useState } from "react";
 import BreadcrumbHeader from "@/components/breadcrumb-header";
 import { CommitSection } from "@/components/section/commit-section";
-import NavItem, { NavItemProps } from "@/components/NavItem";
+import NavItem from "@/components/NavItem";
+import { Personal } from "@/components/account-element/Personal";
+import { MyOrder } from "@/components/account-element/MyOrder";
 
 const navItems = [
 	{ id: "personal", name: "Thông tin cá nhân" },
@@ -19,53 +21,9 @@ const MyAccountPage = () => {
 	const renderContent = () => {
 		switch (active) {
 			case "personal":
-				return (
-					<div>
-						<h2 className="text-xl font-semibold mb-4">Thông tin cá nhân</h2>
-						{/* Form thông tin cá nhân */}
-						<form className="grid grid-cols-2 gap-4">
-							<div>
-								<label>First Name *</label>
-								<input
-									type="text"
-									defaultValue="Leslie"
-									className="border rounded px-3 py-2 w-full"
-								/>
-							</div>
-							<div>
-								<label>Last Name *</label>
-								<input
-									type="text"
-									defaultValue="Cooper"
-									className="border rounded px-3 py-2 w-full"
-								/>
-							</div>
-							<div className="col-span-2">
-								<label>Email *</label>
-								<input
-									type="email"
-									defaultValue="example@gmail.com"
-									className="border rounded px-3 py-2 w-full"
-								/>
-							</div>
-							<div className="col-span-2">
-								<label>Phone *</label>
-								<input
-									type="text"
-									defaultValue="+0123-456-789"
-									className="border rounded px-3 py-2 w-full"
-								/>
-							</div>
-						</form>
-					</div>
-				);
+				return <Personal />;
 			case "orders":
-				return (
-					<div>
-						<h2 className="text-xl font-semibold">Đơn hàng của tôi</h2>
-						<p>Danh sách đơn hàng...</p>
-					</div>
-				);
+				return <MyOrder />;
 			case "address":
 				return (
 					<div>
@@ -109,8 +67,8 @@ const MyAccountPage = () => {
 			/>
 			<div className="container mx-auto">
 				<div className="px-8 lg:px-4 py-8 lg:py-16">
-					<div className="flex flex-col lg:flex-row gap-8">
-						<div className="flex flex-col gap-2 w-60">
+					<div className="flex flex-col lg:flex-row max-sm:items-center gap-8">
+						<div className="flex flex-col gap-2 w-96 max-lg:w-full">
 							{navItems.map((item) => (
 								<NavItem
 									key={item.id}
@@ -118,12 +76,11 @@ const MyAccountPage = () => {
 									name={item.name}
 									active={active === item.id}
 									onClick={() => setActive(item.id)}
+									className="py-8"
 								/>
 							))}
 						</div>
-						<div className="flex-1 h-96 border-2 border-red-500">
-							{renderContent()}
-						</div>
+						<div className="w-full">{renderContent()}</div>
 					</div>
 				</div>
 			</div>

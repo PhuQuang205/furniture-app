@@ -1,6 +1,4 @@
 "use client";
-
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -15,14 +13,13 @@ import {
 import { FurnitureLogo } from "@/components/furniture-logo";
 import { PhotoUpload } from "@/components/photo-upload";
 
-const CompleteProfile = () => {
-	const [showPassword, setShowPassword] = useState(false);
+const CompleteProfile = () => {	
 
 	return (
 		<div className="flex items-center justify-center p-8 bg-white">
 			<div className="w-full max-w-md space-y-8">
 				<div className="space-y-2">
-					<FurnitureLogo />
+					<FurnitureLogo active={false} />
 				</div>
 
 				<div className="space-y-3">
@@ -62,7 +59,7 @@ const CompleteProfile = () => {
 						</Label>
 						<div className="relative">
 							<Select>
-								<SelectTrigger className="w-full rounded-full text-md px-5 border-gray-300">
+								<SelectTrigger className="w-full h-12 rounded-full text-md px-5 border-gray-300">
 									<SelectValue placeholder="Chọn giới tính" />
 								</SelectTrigger>
 								<SelectContent>
