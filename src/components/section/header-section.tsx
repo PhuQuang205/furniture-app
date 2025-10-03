@@ -25,9 +25,8 @@ export const HeaderSection = () => {
 					<Search className="size-5" />
 					<Heart className="size-5" />
 					<ShoppingBagIcon className="size-5" />
-					<User className="size-5" />
+					<Link href="/my-account"><User className="size-5" /></Link>
 				</div>
-				{/* Device mobile or tablet */}
 				<div className="flex lg:hidden p-2 bg-greenly rounded-sm">
 					<Menu className="size-5 text-yelly" />
 				</div>

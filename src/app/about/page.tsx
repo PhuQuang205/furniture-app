@@ -1,39 +1,18 @@
-import React from "react";
-import {
-	Breadcrumb,
-	BreadcrumbItem,
-	BreadcrumbLink,
-	BreadcrumbList,
-	BreadcrumbPage,
-	BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import Link from "next/link";
 import { CommitSection } from "@/components/section/commit-section";
 import { STATS } from "@/context/index";
 import Image from "next/image";
+import BreadcrumbHeader from "@/components/breadcrumb-header";
 
 const AboutUsPage = () => {
 	return (
 		<div>
-			{/* Phần tiêu đề page */}
-			<div className="h-70 bg-subbg flex flex-col items-center justify-center gap-4">
-				<h1 className="text-5xl lg:text-7xl font-semibold">Về chúng tôi</h1>
-				<div>
-					<Breadcrumb>
-						<BreadcrumbList>
-							<BreadcrumbItem>
-								<BreadcrumbLink asChild>
-									<Link href="/">Trang chủ</Link>
-								</BreadcrumbLink>
-							</BreadcrumbItem>
-							<BreadcrumbSeparator />
-							<BreadcrumbItem>
-								<BreadcrumbPage>Về chúng tôi</BreadcrumbPage>
-							</BreadcrumbItem>
-						</BreadcrumbList>
-					</Breadcrumb>
-				</div>
-			</div>
+			<BreadcrumbHeader
+				title="Về chúng tôi"
+				breadcrumbs={[
+					{ label: "Trang chủ", href: "/" },
+					{ label: "Về chúng tôi" },
+				]}
+			/>
 
 			<div className="">
 				<div className="py-4 lg:py-8 flex flex-col items-center gap-2">

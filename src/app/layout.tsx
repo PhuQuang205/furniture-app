@@ -31,7 +31,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={`${inter.className} ${monsieur.variable} antialiased`}>
+			<body className={`${inter.variable} ${monsieur.variable} antialiased`}>
 				<>
 					<TopHeaderSection />
 					<HeaderSection />

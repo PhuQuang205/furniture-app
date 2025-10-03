@@ -1,41 +1,16 @@
-import React from "react";
-import {
-	Breadcrumb,
-	BreadcrumbItem,
-	BreadcrumbLink,
-	BreadcrumbList,
-	BreadcrumbPage,
-	BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 import Link from "next/link";
 import { CommitSection } from "@/components/section/commit-section";
 import { ARTICLES } from "@/context";
 import Image from "next/image";
+import BreadcrumbHeader from "@/components/breadcrumb-header";
 
 const BlogPage = () => {
 	return (
 		<div>
-			{/* Phần tiêu đề page */}
-			<div className="h-70 bg-subbg flex flex-col items-center justify-center gap-4">
-				<h1 className="text-5xl lg:text-7xl font-semibold">
-					Bài viết của chúng tôi
-				</h1>
-				<div>
-					<Breadcrumb>
-						<BreadcrumbList>
-							<BreadcrumbItem>
-								<BreadcrumbLink asChild>
-									<Link href="/">Trang chủ</Link>
-								</BreadcrumbLink>
-							</BreadcrumbItem>
-							<BreadcrumbSeparator />
-							<BreadcrumbItem>
-								<BreadcrumbPage>Bài viết</BreadcrumbPage>
-							</BreadcrumbItem>
-						</BreadcrumbList>
-					</Breadcrumb>
-				</div>
-			</div>
+			<BreadcrumbHeader
+				title="Bài viết của chúng tôi"
+				breadcrumbs={[{ label: "Trang chủ", href: "/" }, { label: "Bài viết" }]}
+			/>
 			{/* Phần nội dung */}
             <div className="container mx-auto px-8 lg:px-4 py-8 lg:py-16">
                 <div className="flex justify-between gap-8">

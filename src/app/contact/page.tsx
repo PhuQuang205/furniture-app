@@ -1,12 +1,4 @@
 import { CONTACT_INFO } from "@/context";
-import {
-	Breadcrumb,
-	BreadcrumbItem,
-	BreadcrumbLink,
-	BreadcrumbList,
-	BreadcrumbPage,
-	BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 import Link from "next/link";
 import { CommitSection } from "@/components/section/commit-section";
 import { Button } from "@/components/ui/button";
@@ -14,29 +6,15 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
 import { Textarea } from "@/components/ui/textarea";
 import Image from "next/image";
+import BreadcrumbHeader from "@/components/breadcrumb-header";
 
 const ContactPage = () => {
 	return (
 		<div>
-			{/* Phần tiêu đề page */}
-			<div className="h-70 bg-subbg flex flex-col items-center justify-center gap-4">
-				<h1 className="text-5xl lg:text-7xl font-semibold">Liên hệ</h1>
-				<div>
-					<Breadcrumb>
-						<BreadcrumbList>
-							<BreadcrumbItem>
-								<BreadcrumbLink asChild>
-									<Link href="/">Trang chủ</Link>
-								</BreadcrumbLink>
-							</BreadcrumbItem>
-							<BreadcrumbSeparator />
-							<BreadcrumbItem>
-								<BreadcrumbPage>Liên hệ</BreadcrumbPage>
-							</BreadcrumbItem>
-						</BreadcrumbList>
-					</Breadcrumb>
-				</div>
-			</div>
+			<BreadcrumbHeader
+				title="Liên hệ"
+				breadcrumbs={[{ label: "Trang chủ", href: "/" }, { label: "Liên hệ" }]}
+			/>
 			<div className="container mx-auto">
 				<div className="py-8 lg:py-16 flex flex-col lg:flex-row gap-2 lg:gap-8 px-8 lg:px-4">
 					{/* Phần điền form */}
@@ -148,7 +126,13 @@ const ContactPage = () => {
 											href={social.url}
 											className="text-yellow-400 text-xl"
 										>
-											<Image src={`${social.image}`} className="size-10" alt={social.name} width={500} height={500}/>
+											<Image
+												src={`${social.image}`}
+												className="size-10"
+												alt={social.name}
+												width={500}
+												height={500}
+											/>
 										</Link>
 									))}
 								</div>
