@@ -1,6 +1,6 @@
 "use client";
 
-import QuestionCard from "@/components/question-card";
+import { QuestionCard } from "@/components/QuestionCard";
 import { FAQDATA } from "@/context/index";
 
 export const FaqsSection = () => {

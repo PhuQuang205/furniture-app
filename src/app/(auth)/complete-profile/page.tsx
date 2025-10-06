@@ -10,7 +10,7 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 
-import { FurnitureLogo } from "@/components/furniture-logo";
+import { FurnitureLogo } from "@/components/FurnitureLogo";
 import { PhotoUpload } from "@/components/photo-upload";
 
 const CompleteProfile = () => {	

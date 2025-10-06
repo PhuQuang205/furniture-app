@@ -1,6 +1,6 @@
 "use client";
 
-import QuestionCard from "@/components/question-card";
+import QuestionCard from "@/components/QuestionCard";
 import { CommitSection } from "@/components/section/commit-section";
 import { useState } from "react";
 import { FAQS } from "@/context";

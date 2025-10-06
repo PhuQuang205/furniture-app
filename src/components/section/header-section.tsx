@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { FurnitureLogo } from "@/components/furniture-logo";
+import { FurnitureLogo } from "@/components/FurnitureLogo";
 import { Heart, Menu, Search, ShoppingBagIcon, User } from "lucide-react";
 import {NAV_LINK} from "@/context/index"
 

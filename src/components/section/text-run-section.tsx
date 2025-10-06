@@ -21,7 +21,7 @@ export const TextRunSection = () => {
 					</p>
 				</div>
 				<div className="flex items-center overflow-clip">
-					<div className="flex-none flex gap-4 [-webkit-mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] [-webkit-mask-repeat:no-repeat] [-webkit-mask-size:100%]">
+					<div className="flex-none flex gap-4 [-webkit-mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)] [-webkit-mask-repeat:no-repeat] [-webkit-mask-size:100%]">
 						{PARTNER.map((item) => (
 							<div key={item.id} className="">
 								<Image

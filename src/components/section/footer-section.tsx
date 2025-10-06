@@ -1,4 +1,4 @@
-import { FurnitureLogo } from "@/components/furniture-logo";
+import { FurnitureLogo } from "@/components/FurnitureLogo";
 import { Button } from "@/components/ui/button";
 import { Facebook, Instagram, Youtube } from "lucide-react";
 import Link from "next/link";

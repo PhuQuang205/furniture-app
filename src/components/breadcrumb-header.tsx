@@ -26,7 +26,7 @@ export default function BreadcrumbHeader({
 }: PageHeaderProps) {
 	return (
 		<div className="h-70 bg-subbg flex flex-col items-center justify-center gap-4">
-			<h1 className="text-5xl lg:text-7xl font-semibold">{title}</h1>
+			<h1 className="text-5xl text-center lg:text-7xl font-semibold">{title}</h1>
 			<div>
 				<Breadcrumb>
 					<BreadcrumbList>

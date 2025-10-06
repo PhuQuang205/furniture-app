@@ -1,4 +1,5 @@
-import { CardProductLine } from "@/components/card-product-line";
+import { CardDealProduct } from "@/components/CardDealProduct";
+import { DEALPRODUCTS } from "@/context";
 
 export const TodayDealSection = () => {
 	return (
@@ -25,10 +26,9 @@ export const TodayDealSection = () => {
 				{/* Phần sản phẩm */}
 				<div className="my-8 flex gap-4">
 					<div className="max-md:flex-none flex gap-4">
-						<CardProductLine />
-						<CardProductLine />
-						<CardProductLine />
-						<CardProductLine />
+						{DEALPRODUCTS.map((deal) => 
+							<CardDealProduct key={deal.id} deal={deal} />
+						)}
 					</div>
 				</div>
 			</div>

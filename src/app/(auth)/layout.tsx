@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/app/globals.css";
-import { HeroBanner } from "@/components/hero-banner";
+import { HeroBanner } from "@/components/HeroBanner";
 
 const inter = Inter({
 	variable: "--font-inter",

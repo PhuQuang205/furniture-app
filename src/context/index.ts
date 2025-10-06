@@ -1,5 +1,64 @@
-import { Faq } from "@/app/faqs/page";
 import { Product } from "@/components/product-card";
+import { Faq } from "@/app/(main-layout)/faqs/page";
+
+
+export const DEALPRODUCTS = [
+	{
+		id: 1,
+		name: "Ghế gỗ làm bằng mây",
+		category: "Ghế",
+		price: 120000,
+		rating: 5.0,
+		image: "/resource/product-image/1.png",
+		description: "Ghế được làm thủ công từ mây tự nhiên, mang lại cảm giác ấm cúng và thoải mái cho không gian sống.",
+	},
+	{
+		id: 2,
+		name: "Bàn trà tròn tối giản",
+		category: "Bàn",
+		price: 250000,
+		rating: 4.8,
+		image: "/resource/product-image/2.png",
+		description: "Bàn trà thiết kế tối giản với mặt gỗ sồi cao cấp, phù hợp cho không gian phòng khách hiện đại.",
+	},
+	{
+		id: 3,
+		name: "Kệ sách gỗ thông 3 tầng",
+		category: "Kệ",
+		price: 340000,
+		rating: 4.9,
+		image: "/resource/product-image/3.png",
+		description: "Kệ sách nhỏ gọn, dễ lắp ráp, làm từ gỗ thông tự nhiên giúp không gian thêm gọn gàng và ấm áp.",
+	},
+	{
+		id: 4,
+		name: "Đèn ngủ phong cách Bắc Âu",
+		category: "Đèn",
+		price: 180000,
+		rating: 4.7,
+		image: "/resource/product-image/4.png",
+		description: "Đèn ngủ ánh sáng ấm, thân gỗ tự nhiên kết hợp chao vải, mang lại không gian thư giãn và sang trọng.",
+	},
+	{
+		id: 5,
+		name: "Ghế sofa mini vải nhung",
+		category: "Ghế",
+		price: 460000,
+		rating: 4.6,
+		image: "/resource/product-image/5.png",
+		description: "Sofa mini bọc vải nhung mềm mịn, khung gỗ chắc chắn, thích hợp cho phòng ngủ hoặc phòng đọc sách.",
+	},
+];
+
+
+export const NAVITEMS = [
+	{ id: "personal", name: "Thông tin cá nhân", href: "/my-account/presonal" },
+	{ id: "orders", name: "Đơn hàng của tôi", href: "/my-account/orders" },
+	{ id: "address", name: "Quản lý địa chỉ", href: "/my-account/address" },
+	{ id: "payment", name: "Thanh toán", href: "/my-account/payment" },
+	{ id: "password", name: "Quản lý mật khẩu", href: "/my-account/password" },
+	{ id: "logout", name: "Đăng xuất", href: "/my-account/logout" },
+];
 
 export const NAV_LINK = [
 	{
@@ -25,6 +84,54 @@ export const NAV_LINK = [
 	{
 		title: "Bài viết",
 		path: "/blog",
+	},
+];
+
+
+export const PRODUCTS = [
+	{
+		id: 1,
+		name: "Wooden Sofa Chair",
+		price: 80.0,
+		originalPrice: 160.0,
+		rating: 4.9,
+		category: "Latest Products",
+		image: "https://i.pinimg.com/736x/9b/e6/97/9be697bd51814e10e83d3fd6498b3c1f.jpg",
+		discount: 50,
+		hasCountdown: true,
+	},
+	{
+		id: 2,
+		name: "Circular Sofa Chair",
+		price: 108.0,
+		originalPrice: 120.0,
+		rating: 5.0,
+		category: "Best Sellers",
+		image: "https://i.pinimg.com/1200x/d1/94/7a/d1947a79a0789162b7d5e434d54f57a4.jpg",
+		discount: 10,
+		hasCountdown: false,
+	},
+	{
+		id: 3,
+		name: "Wooden Nightstand",
+		price: 54.0,
+		originalPrice: 60.0,
+		rating: 4.8,
+		category: "Featured Products",
+		image: "https://i.pinimg.com/1200x/c3/d2/c0/c3d2c0b705c405597adbd53505e1e6f9.jpg",
+		discount: 10,
+		hasCountdown: false,
+	},
+	{
+		id: 4,
+		name: "Bean Bag Chair",
+		price: 72.0,
+		originalPrice: null,
+		rating: 4.6,
+		category: "Latest Products",
+		image: "https://i.pinimg.com/736x/7e/c1/e5/7ec1e5efcef385cc7e6f78a0da42d488.jpg",
+		discount: 10,
+		hasCountdown: false,
 	},
 ];
 
@@ -163,29 +270,31 @@ export const PARTNER = [
 export const ARTICLES = [
 	{
 		id: 1,
-		date: "15 April 2024",
-		title: "Furniture Trends 2024: What's Hot and What's Not",
+		date: "15 Tháng 4, 2025",
+		title: "Xu hướng nội thất 2025: Sự kết hợp giữa tự nhiên và công nghệ",
 		description:
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+			"Năm 2025 đánh dấu sự lên ngôi của phong cách nội thất thân thiện môi trường, sử dụng vật liệu tái chế và tích hợp công nghệ thông minh trong từng chi tiết thiết kế.",
 		image: "/resource/articles/articles-1.jpg",
 	},
 	{
 		id: 2,
-		date: "14 April 2024",
-		title: "The Ultimate Guide to Choosing the Perfect Sofa",
+		date: "14 Tháng 4, 2025",
+		title: "Cách chọn sofa hoàn hảo cho không gian sống hiện đại",
 		description:
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+			"Một chiếc sofa phù hợp không chỉ mang lại sự thoải mái mà còn thể hiện phong cách sống của bạn. Bài viết hướng dẫn cách chọn kích thước, chất liệu và màu sắc sofa hài hòa với căn phòng.",
 		image: "/resource/articles/articles-2.jpg",
 	},
 	{
 		id: 3,
-		date: "12 April 2024",
-		title: "Choosing the Right Dining Table for Your Lifestyle",
+		date: "12 Tháng 4, 2025",
+		title: "Bí quyết chọn bàn ăn phù hợp với phong cách sống gia đình",
 		description:
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+			"Bàn ăn không chỉ là nơi dùng bữa mà còn là trung tâm kết nối các thành viên trong gia đình. Hãy cùng khám phá các kiểu bàn ăn phù hợp với không gian và thói quen sinh hoạt của bạn.",
 		image: "/resource/articles/articles-3.jpg",
 	},
 ];
+
+
 
 export const products: Product[] = [
 	{

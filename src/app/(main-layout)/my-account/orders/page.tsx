@@ -8,11 +8,10 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import React from "react";
 
-export const MyOrder = () => {
+const Order = () => {
 	return (
-		<div className="">
+		<>
 			<div className="flex items-center justify-between">
 				<div className="font-semibold">Đơn hàng (1)</div>
 				<div className="flex items-center gap-2">
@@ -33,12 +32,15 @@ export const MyOrder = () => {
 								</SelectGroup>
 							</SelectContent>
 						</Select>
-					</div>					
+					</div>
 				</div>
 			</div>
-			<div className="p-4 mt-8 rounded-2xl h-96 border-2 border-red-500">
-				<OrderCard/>
+			<div className="mt-8 rounded-2xl space-y-4">
+				<OrderCard />
+				<OrderCard />
 			</div>
-		</div>
+		</>
 	);
 };
+
+export default Order;

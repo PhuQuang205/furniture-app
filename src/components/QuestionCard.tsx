@@ -9,7 +9,7 @@ export type PropQuestion = {
 	};
 };
 
-const QuestionCard = ({ question }: PropQuestion) => {
+export const QuestionCard = ({ question }: PropQuestion) => {
 	const [openFaq, setOpenFaq] = useState<number | null>(null);
 
 	const toggleFaq = (id: number) => {
@@ -80,4 +80,3 @@ const QuestionCard = ({ question }: PropQuestion) => {
 	);
 };
 
-export default QuestionCard;

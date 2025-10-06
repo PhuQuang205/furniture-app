@@ -5,7 +5,7 @@ export interface NavItemProps {
   name: string;
   active: boolean;
   onClick: (id: string) => void;
-  className: string,
+  className?: string,
 }
 
 export default function NavItem({ id, name, active, onClick, className }: NavItemProps) {

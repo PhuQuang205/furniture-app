@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { FurnitureLogo } from "@/components/furniture-logo";
+import { FurnitureLogo } from "@/components/FurnitureLogo";
 
 export const RegisterPage = () => {
 	return (
