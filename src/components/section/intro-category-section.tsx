@@ -1,128 +1,107 @@
 import Image from "next/image";
 
-const subcategories = ["Bàn tròn", "Bàn cổ điển", "Bàn hiện đại", "Bàn ăn"];
-
 const chairs = [
-	"Ghế gỗ",
-	"Ghế nhựa",
-	"Ghế xoay (ghế văn phòng)",
-	"Ghế sofa",
-	"Ghế armchair (ghế bành)",
-	"Ghế bar",
+  "Ghế gỗ",
+  "Ghế nhựa",
+  "Ghế xoay (ghế văn phòng)",
+  "Ghế sofa",
+  "Ghế armchair (ghế bành)",
+  "Ghế bar",
 ];
 
+const tables = ["Bàn tròn", "Bàn cổ điển", "Bàn hiện đại", "Bàn ăn"];
+const cabinets = ["Kệ gỗ", "Kệ nhựa", "Tủ quần áo", "Tủ trưng bày"];
+
 export const IntroCategorySection = () => {
-	return (
-		<section className="container mx-auto">
-			<div className="max-w-5xl mx-auto px-8 lg:px-0 ">
-				<div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-					{/* Ghế */}
-					<div className="lg:row-span-2 bg-subbg rounded-xl">
-						<div className="flex flex-col relative">
-							<div className="p-6 space-y-4">
-								<div className="rounded-full inline-block bg-white text-center">
-									<p className="font-semibold text-lg whitespace-nowrap px-2">
-										<span className="text-lg font-medium text-yelly">25+</span>{" "}
-										Items
-									</p>
-								</div>
-								<h3 className="text-3xl lg:text-5xl font-medium text-black">
-									Ghế
-								</h3>
-								<div>
-									{chairs.map((item, index) => (
-										<p
-											key={index}
-											className="text-md font-[300] whitespace-nowrap"
-										>
-											{item}
-										</p>
-									))}
-								</div>
-							</div>
-							<div className="relative right-0 bottom-20 size-[300px]">
-								<Image
-									src="/resource/category-image/1.png"
-									width={500}
-									height={500}
-									alt="dkasdl"
-									className="object-contain"
-								/>
-							</div>
-						</div>
-					</div>
-					{/* Bàn */}
-					<div className=" bg-subbg rounded-xl">
-						<div className="flex items-start">
-							<div className="p-6 space-y-4">
-								<div className="rounded-full bg-white text-center">
-									<p className="font-semibold text-lg whitespace-nowrap px-2">
-										<span className="text-lg font-medium text-yelly">25+</span>{" "}
-										Items
-									</p>
-								</div>
-								<h3 className="text-3xl lg:text-5xl font-medium text-black">
-									Bàn
-								</h3>
-								<div>
-									{subcategories.map((item, index) => (
-										<p
-											key={index}
-											className="text-md font-[300] whitespace-nowrap"
-										>
-											{item}
-										</p>
-									))}
-								</div>
-							</div>
-							<div className="relative overflow-hidden">
-								<Image
-									src="/resource/category-image/2.png"
-									width={500}
-									height={500}
-									alt="dkasdl"
-									className="relative -right-10 top-0 w-[500px] scale-150 object-contain"
-								/>
-							</div>
-						</div>
-					</div>
-					{/* Kệ tủ */}
-					<div className="bg-subbg rounded-xl">
-						<div className="flex items-start">
-							<div className="p-6 space-y-4">
-								<div className="rounded-full bg-white text-center">
-									<p className="font-semibold text-lg whitespace-nowrap px-2">
-										<span className="text-lg font-medium text-yelly">15+</span>{" "}
-										Items
-									</p>
-								</div>
-								<h3 className="text-3xl lg:text-5xl font-medium whitespace-nowrap text-black">
-									Kệ tủ
-								</h3>
-								<div>
-									{subcategories.map((item, index) => (
-										<p
-											key={index}
-											className="text-md font-[300] whitespace-nowrap"
-										>
-											{item}
-										</p>
-									))}
-								</div>
-							</div>
-							<div className="relative overflow-hidden">
-								<Image
-									src="/resource/category-image/3.png"
-									width={500}
-									height={500}
-									alt="dkasdl"
-									className="relative -right-10 -bottom-20 w-[500px] scale-150 object-contain"
-								/>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	);
+  return (
+    <section className="container mx-auto">
+      <div className="px-6 lg:px-0 py-10 lg:py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Ghế */}
+          <div className="lg:row-span-2 bg-subbg rounded-2xl flex justify-between items-center p-6 relative overflow-hidden">
+            <div className="space-y-4 z-10">
+              <div className="rounded-full bg-white inline-block px-3 py-1">
+                <p className="font-semibold text-sm">
+                  <span className="text-yelly font-bold">1500+</span> Items
+                </p>
+              </div>
+              <h3 className="text-3xl lg:text-4xl font-semibold text-black">
+                Ghế
+              </h3>
+              <div className="text-gray-700 text-sm space-y-1">
+                {chairs.map((item, i) => (
+                  <p key={i}>{item}</p>
+                ))}
+              </div>
+            </div>
+            <div className="absolute right-0 bottom-0">
+              <Image
+                src="/resource/category-image/1.png"
+                width={320}
+                height={320}
+                alt="Ghế"
+                className="object-contain translate-x-10 translate-y-6"
+              />
+            </div>
+          </div>
+
+          {/* Bàn */}
+          <div className="bg-subbg rounded-2xl flex justify-between items-center p-6 relative overflow-hidden">
+            <div className="space-y-4 z-10">
+              <div className="rounded-full bg-white inline-block px-3 py-1">
+                <p className="font-semibold text-sm">
+                  <span className="text-yelly font-bold">750+</span> Items
+                </p>
+              </div>
+              <h3 className="text-3xl lg:text-4xl font-semibold text-black">
+                Bàn
+              </h3>
+              <div className="text-gray-700 text-sm space-y-1">
+                {tables.map((item, i) => (
+                  <p key={i}>{item}</p>
+                ))}
+              </div>
+            </div>
+            <div className="absolute right-0 bottom-0">
+              <Image
+                src="/resource/category-image/2.png"
+                width={260}
+                height={260}
+                alt="Bàn"
+                className="object-contain translate-x-6 translate-y-6"
+              />
+            </div>
+          </div>
+
+          {/* Kệ tủ */}
+          <div className="bg-subbg rounded-2xl flex justify-between items-center p-6 relative overflow-hidden">
+            <div className="space-y-4 z-10">
+              <div className="rounded-full bg-white inline-block px-3 py-1">
+                <p className="font-semibold text-sm">
+                  <span className="text-yelly font-bold">450+</span> Items
+                </p>
+              </div>
+              <h3 className="text-3xl lg:text-4xl font-semibold text-black">
+                Kệ tủ
+              </h3>
+              <div className="text-gray-700 text-sm space-y-1">
+                {cabinets.map((item, i) => (
+                  <p key={i}>{item}</p>
+                ))}
+              </div>
+            </div>
+            <div className="absolute right-0 bottom-0">
+              <Image
+                src="/resource/category-image/3.png"
+                width={260}
+                height={260}
+                alt="Kệ tủ"
+                className="object-contain translate-x-6 translate-y-6"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 };

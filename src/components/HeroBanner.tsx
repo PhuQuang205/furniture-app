@@ -40,9 +40,9 @@ export const HeroBanner = () => {
 							fill
 							className="object-cover"
 							priority={index === 0}
+							sizes="(max-width: 768px) 100vw,(max-width: 1200px) 50vw,33vw"
 						/>
 
-						{/* Overlay gradient */}
 						<div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
 
 						<div className="relative w-full h-full">

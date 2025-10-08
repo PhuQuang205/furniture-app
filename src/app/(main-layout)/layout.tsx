@@ -4,6 +4,7 @@ import "@/app/globals.css";
 import { FooterSection } from "@/components/section/footer-section";
 import { TopHeaderSection } from "@/components/section/top-header-section";
 import { HeaderSection } from "@/components/section/header-section";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({
 	variable: "--font-inter",
@@ -37,6 +38,7 @@ export default function RootLayout({
 					<HeaderSection />
 					{children}
 					<FooterSection />
+					<Toaster/>
 				</>
 			</body>
 		</html>

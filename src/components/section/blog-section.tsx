@@ -27,9 +27,10 @@ export const BlogSection = () => {
 					</div>
 				</div>
 				<div className="flex overflow-x-scroll no-scrollbar">
-					<div className="flex-none flex lg:justify-between lg:w-full gap-4 lg:gap-8">
+					<div className="flex-none flex gap-4 lg:gap-8">
 						{ARTICLES.map((article) => (
-							<CardBlog key={article.id} blog={article} />							
+							<CardBlog key={article.id} blog={article} 
+							className="w-[450px]"/>							
 						))}
 					</div>
 				</div>

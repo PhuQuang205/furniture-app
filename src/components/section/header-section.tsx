@@ -4,7 +4,6 @@ import { FurnitureLogo } from "@/components/FurnitureLogo";
 import { Heart, Menu, Search, ShoppingBagIcon, User } from "lucide-react";
 import {NAV_LINK} from "@/context/index"
 
-
 export const HeaderSection = () => {
 	return (
 		<section className="container mx-auto">
@@ -23,8 +22,8 @@ export const HeaderSection = () => {
 				</div>
 				<div className="gap-4 hidden lg:flex">
 					<Search className="size-5" />
-					<Heart className="size-5" />
-					<ShoppingBagIcon className="size-5" />
+					<Link href="/wishlist"><Heart className="size-5" /></Link>
+					<Link href="/shopping-cart"><ShoppingBagIcon className="size-5" /></Link>
 					<Link href="/my-account"><User className="size-5" /></Link>
 				</div>
 				<div className="flex lg:hidden p-2 bg-greenly rounded-sm">

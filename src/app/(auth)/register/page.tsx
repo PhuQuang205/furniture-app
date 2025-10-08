@@ -99,13 +99,12 @@ export const RegisterPage = () => {
 							</Link>
 						</Label>
 					</div>
-
-					<div className="flex flex-col">
-						<Button className="bg-greenly mb-6 h-12 text-md cursor-pointer hover:bg-greenly/90">
-							<Link href="/complete-profile" className="size-">
-								Đăng ký
-							</Link>
-						</Button>
+					<Button className="w-full bg-greenly mb-6 h-12 text-md cursor-pointer hover:bg-greenly/90">
+						<Link href="/complete-profile" className="size-">
+							Đăng ký
+						</Link>
+					</Button>
+					{/* <div className="flex flex-col">
 						<div className="flex items-center my-6">
 							<div className="flex-grow border-t border-gray-300"></div>
 							<span className="mx-4 text-gray-500 text-sm">
@@ -139,7 +138,7 @@ export const RegisterPage = () => {
 							</svg>
 							Đăng ký bằng Google
 						</Button>
-					</div>
+					</div> */}
 
 					<div className="text-center">
 						<span className="text-sm text-gray-600">
