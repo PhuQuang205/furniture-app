@@ -9,6 +9,7 @@ import { CommitSection } from "@/components/section/commit-section";
 
 import { PropsCategory } from "@/lib/services/categoryService";
 import { getCategories } from "@/lib/services/categoryService";
+import Link from "next/link";
 
 const CategoryPage = () => {
 	const [categrories, setCategories] = useState<PropsCategory[]>([]);
@@ -57,27 +58,25 @@ const CategoryPage = () => {
 					{loading
 						? "Loading..."
 						: categrories.map((category) => (
-								<div
-									key={category.id}
-									className="flex-none md:flex-initial lg:w-[500px] md:w-[300px] flex flex-col"
-								>
-									<div className="size-[300px] rounded-full overflow-hidden">
-										<Image
-											src={
-												category.image ||
-												"https://static.vecteezy.com/system/resources/thumbnails/004/141/669/small_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg"
-											}
-											alt={category.alias}
-											width={300}
-											height={300}
-											className="object-cover size-full rounded-full"
-										/>
+								<Link key={category.id} href={`/categories/${category.id}`}>
+									<div className="flex-none md:flex-initial lg:w-[500px] md:w-[300px] flex flex-col">
+										<div className="size-[300px] rounded-full overflow-hidden">
+											<Image
+												src={
+													category.image ||
+													"https://static.vecteezy.com/system/resources/thumbnails/004/141/669/small_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg"
+												}
+												alt={category.alias}
+												width={300}
+												height={300}
+												className="object-cover size-full rounded-full"
+											/>
+										</div>
+										<p className="text-sm font-medium text-black/60 text-left">
+											{category.name}
+										</p>
 									</div>
-
-									<p className="text-sm font-medium text-black/60 text-left">
-										{category.name}
-									</p>
-								</div>
+								</Link>
 						  ))}
 				</div>
 			</div>

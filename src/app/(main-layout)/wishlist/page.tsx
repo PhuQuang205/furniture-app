@@ -135,7 +135,7 @@ const WishListPage = () => {
 
 									<TableCell
 										className={cn("text-center",product.stockStatus === "Instock"
-												? "text-emerald-600 font-medium"
+												? "text-emerald-500 font-medium"
 												: "text-red-500 font-medium")											
 										}
 									>

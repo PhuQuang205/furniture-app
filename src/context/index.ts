@@ -83,7 +83,7 @@ export const NAV_LINK = [
 		path: "/products",
 	},
 	{
-		title: "Danh mục",
+		title: "Bộ sưu tập",
 		path: "/categories",
 	},
 	{

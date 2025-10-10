@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Inter, Monsieur_La_Doulaise } from "next/font/google";
-import "@/app/globals.css";
 import { FooterSection } from "@/components/section/footer-section";
 import { TopHeaderSection } from "@/components/section/top-header-section";
 import { HeaderSection } from "@/components/section/header-section";
 import { Toaster } from "@/components/ui/sonner";
+import "@/app/globals.css";
 
 const inter = Inter({
 	variable: "--font-inter",
