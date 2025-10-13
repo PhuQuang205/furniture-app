@@ -5,6 +5,7 @@ import { TopHeaderSection } from "@/components/section/top-header-section";
 import { HeaderSection } from "@/components/section/header-section";
 import { Toaster } from "@/components/ui/sonner";
 import "@/app/globals.css";
+// import { Providers } from "@/app/(main-layout)/providers";
 
 const inter = Inter({
 	variable: "--font-inter",
@@ -34,11 +35,13 @@ export default function RootLayout({
 		<html lang="en">
 			<body className={`${inter.variable} ${monsieur.variable} antialiased`}>
 				<>
-					<TopHeaderSection />
-					<HeaderSection />
-					{children}
-					<FooterSection />
-					<Toaster/>
+					{/* <Providers> */}
+						<TopHeaderSection />
+						<HeaderSection />
+						{children}
+						<FooterSection />
+						<Toaster />
+					{/* </Providers> */}
 				</>
 			</body>
 		</html>

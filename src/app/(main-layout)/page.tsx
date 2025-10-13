@@ -10,7 +10,7 @@ import { TodayDealSection } from "@/components/section/today-deal-section";
 
 export default function Home() {
 	return (
-		<>			
+		<>
 			<BannerSection />
 			<CommitSection />
 			<IntroCategorySection />

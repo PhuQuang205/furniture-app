@@ -1,6 +1,11 @@
-import Image from "next/image";
-import { Label } from "@/components/ui/label";
+"use client";
+
+import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { CustomerRequest, updateCustomer } from "@/lib/services/authService";
+import { PhotoUpload } from "@/components/photo-upload";
+import { Edit, X, CrossIcon } from "lucide-react";
 import {
 	Select,
 	SelectContent,
@@ -8,105 +13,149 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
+import { Customer } from "@/lib/services/authService";
+import { toast } from "sonner";
 
-const Personal = () => {
+export default function MyAccount() {
+	const [customer, setCustomer] = useState<Customer>();
+	const [profile, setProfile] = useState<CustomerRequest>({
+		id: 0,
+		firstName: "",
+		lastName: "",
+		gender: "",
+		phoneNumber: "",
+	});
+
+	const [avatar, setAvatar] = useState<File | null>(null);
+	const [loading, setLoading] = useState(false);
+	const [isEditing, setIsEditing] = useState(false);
+	useEffect(() => {
+		const stored = localStorage.getItem("customer");
+		if (stored) {
+			const parsedCustomer = JSON.parse(stored);
+			setCustomer(parsedCustomer);
+			setProfile({
+				id: Number(parsedCustomer?.id) || 0,
+				firstName: parsedCustomer?.firstName || "",
+				lastName: parsedCustomer?.lastName || "",
+				gender: parsedCustomer?.gender || "",
+				phoneNumber: parsedCustomer?.phoneNumber || "",
+			});
+		}
+	}, []);
+
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = e.target;
+		setProfile((prev) => ({ ...prev, [name]: value }));
+	};
+
+	const handeSubmit = async () => {
+		setLoading(true) 
+		try {
+			const res = await updateCustomer(profile, avatar ?? undefined)
+			if(res.status === 200) {
+				toast.success("Cập nhật thông tin thành công!")
+			}
+		} catch (error) {
+			console.log("error: ", error)
+		} finally {
+			setLoading(false)
+		}
+	} 
 	return (
-		<div className="flex flex-col gap-8">
-			<div className="size-[150px] rounded-full overflow-hidden mb-8">
-				<Image
-					src="https://i.pinimg.com/736x/80/e2/30/80e230ceac7bc17d2f89eb0d2288d677.jpg"
-					alt="logo"
-					className="object-cover size-full"
-					width={50}
-					height={50}
-				/>
-			</div>
-			<form className="space-y-6">
-				<div className="grid grid-cols-2 gap-4">
-					<div className="space-y-2">
-						<Label
-							htmlFor="firstName"
-							className="text-md font-semibold text-black"
-						>
-							Họ
-						</Label>
-						<Input
-							id="firstName"
-							type="text"
-							placeholder="Nhập họ"
-							className="h-12 border-gray-300 px-5"
-						/>
-					</div>
-					<div className="space-y-2">
-						<Label
-							htmlFor="lastName"
-							className="text-md font-semibold text-black"
-						>
-							Tên
-						</Label>
-						<Input
-							id="lastName"
-							type="text"
-							placeholder="Nhập tên"
-							className="h-12 px-5 border-gray-300"
-						/>
-					</div>
-				</div>
+		<div className="container mx-auto py-10 px-4">
+			<h2 className="text-2xl font-semibold mb-6">Thông tin tài khoản</h2>
 
-				<div className="space-y-2">
-					<Label htmlFor="email" className="text-md text-black font-semibold">
-						Email
-					</Label>
+			<PhotoUpload
+				onPhotoSelect={(file) => console.log(setAvatar(file))}
+				initialImage={customer?.avatarUrl}
+				disabled={!isEditing}
+			/>
+
+			<div className="space-y-4 mt-6">
+				<div className="flex items-center gap-2">
 					<Input
-						id="email"
-						type="email"
-						placeholder="Nhập địa chỉ email"
-						className="h-12 border-gray-300 px-5"
+						name="firstName"
+						value={profile.firstName}
+						onChange={handleChange}
+						placeholder="Họ"
+						disabled={!isEditing}
+					/>
+					<Input
+						name="lastName"
+						value={profile.lastName}
+						onChange={handleChange}
+						placeholder="Tên"
+						disabled={!isEditing}
 					/>
 				</div>
 
-				<div className="space-y-2">
-					<Label htmlFor="phone" className="text-md text-black font-semibold">
-						Số điện thoại
-					</Label>
-					<div className="relative">
-						<Input
-							id="phone"
-							type="text"
-							placeholder="Nhập số điện thoại"
-							className="h-12 pr-10 border-gray-300 px-5"
-						/>
-					</div>
-				</div>
+				<Select
+					value={profile?.gender}
+					onValueChange={(e) => setProfile((prev) => ({ ...prev, gender: e }))}
+					disabled={!isEditing}
+				>
+					<SelectTrigger className="h-12 w-full">
+						<SelectValue placeholder="Chọn giới tính" />
+					</SelectTrigger>
+					<SelectContent>
+						<SelectItem value="MALE">Nam</SelectItem>
+						<SelectItem value="FEMALE">Nữ</SelectItem>
+					</SelectContent>
+				</Select>
 
-				<div className="space-y-2">
-					<Label htmlFor="phone" className="text-md font-semibold text-black">
-						Giới tính
-					</Label>
-					<Select>
-						<SelectTrigger className="h-12 w-full rounded-full text-sm px-5 border-gray-300">
-							<SelectValue
-								placeholder="Chọn giới tính"
-								className="data-[placeholder]:text-gray-300"
-							/>
-						</SelectTrigger>
-						<SelectContent>
-							<SelectItem className="py-2" value="male">
-								Nam
-							</SelectItem>
-							<SelectItem className="py-2" value="female">
-								Nữ
-							</SelectItem>
-						</SelectContent>
-					</Select>
+				<Input
+					name="phoneNumber"
+					value={profile.phoneNumber}
+					onChange={handleChange}
+					placeholder="Số điện thoại"
+					disabled={!isEditing}
+				/>
+
+				<Input
+					name="email"
+					value={customer?.email ?? ""}
+					placeholder="Email"
+					disabled
+				/>
+
+				<div className="flex items-center gap-4 h-12 mt-6">
+					{isEditing ? (
+						<Button
+							onClick={() => {
+								setIsEditing(false);
+								setAvatar(null);
+							}}
+							variant="outline"
+							className="h-full w-[200px] flex items-center gap-2 cursor-pointer"
+						>
+							<X className="size-5" />
+							Huỷ
+						</Button>
+					) : (
+						<Button
+							onClick={() => setIsEditing(true)}
+							className="h-full w-[200px] flex items-center gap-2 cursor-pointer"
+						>
+							<Edit className="size-5" />
+							Chỉnh sửa
+						</Button>
+					)}
+
+					<Button
+						onClick={handeSubmit}
+						disabled={!isEditing || loading}
+						className={`h-full bg-greenly text-white flex items-center gap-2 transition-all duration-300 ${
+							!isEditing
+								? "bg-gray-700 text-white border border-gray-900"
+								: "cursor-pointer"
+						}`}
+					>
+						<CrossIcon className="size-5" />
+						{loading ? "Đang cập nhật..." : "Lưu thay đổi"}
+					</Button>
 				</div>
-				<div className="w-fit">
-					<Button className="h-12 cursor-pointer">Cập nhật thông tin</Button>
-				</div>
-			</form>
+			</div>
 		</div>
 	);
-};
-
-export default Personal;
+}

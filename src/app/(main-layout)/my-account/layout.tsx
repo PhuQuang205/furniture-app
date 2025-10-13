@@ -16,7 +16,7 @@ export default function AccountLayout({
 					{ label: "Tài khoản" },
 				]}
 			/>
-			{/* Sidebar */}
+			
 			<div className="container mx-auto">
 				<div className="px-8 lg:px-4 py-8 lg:py-16">
 					<div className="flex flex-col lg:flex-row max-sm:items-center gap-8">

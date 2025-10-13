@@ -115,7 +115,7 @@ export const BannerSection = () => {
 									</div>
 								))}
 								<div className="size-10 rounded-full bg-yellow-400 border-2 border-white flex items-center justify-center">
-									<Plus  className="size-5"/>
+									<Plus className="size-5" />
 								</div>
 							</div>
 							<div>
@@ -127,71 +127,66 @@ export const BannerSection = () => {
 						</div>
 					</div>
 
-					<div className="">
-						<div className="flex flex-col overflow-hidden">
-							<div className="w-[700px]">
-								<Swiper
-									modules={[Navigation]}
-									spaceBetween={20}
-									slidesPerView={1.7}
-									onSwiper={setSwiperInstance}
-									className="furniture-hero-swiper"
-								>
-									{furnitureCategories.map((category) => (
-										<SwiperSlide key={category.id}>
-											<div className="relative rounded-xl bg-white border-2 border-gray-300 ">
-												{/* Ảnh */}
-												<div className="flex-none">
-													<div className="overflow-hidden p-2">
-														<Image
-															src={category.image}
-															alt={category.title}
-															className="object-cover w-[400px] h-[300px] rounded-xl"
-															width={500}
-															height={300}
-															priority
-														/>
+					<div className="flex flex-col overflow-hidden">
+						<div className="w-[800px]">
+							<Swiper
+								modules={[Navigation]}
+								spaceBetween={20}
+								slidesPerView={1.7}
+								onSwiper={setSwiperInstance}
+								className="furniture-hero-swiper"
+							>
+								{furnitureCategories.map((category) => (
+									<SwiperSlide key={category.id}>
+										<div className="relative rounded-xl bg-white border-2 border-gray-300 ">
+											<div className="flex-none">
+												<div className="overflow-hidden p-2">
+													<Image
+														src={category.image}
+														alt={category.title}
+														width={400}
+														height={300}
+														className="object-cover rounded-xl w-auto h-auto"
+														loading="lazy"
+													/>
+												</div>
+												<div className="absolute top-4 right-4 bg-black/70 text-white px-3 py-1 rounded-full text-sm font-medium">
+													{category.price}
+												</div>
+												{/* Nội dung */}
+												<div className="p-2 flex items-center justify-between">
+													<div>
+														<h3 className="text-xl font-bold text-gray-900 mb-1">
+															{category.title}
+														</h3>
+														<p className="text-gray-600">{category.items}</p>
 													</div>
-													<div className="absolute top-4 right-4 bg-black/70 text-white px-3 py-1 rounded-full text-sm font-medium">
-														{category.price}
-													</div>
-													{/* Nội dung */}
-													<div className="p-2 flex items-center justify-between">
-														<div>
-															<h3 className="text-xl font-bold text-gray-900 mb-1">
-																{category.title}
-															</h3>
-															<p className="text-gray-600">{category.items}</p>
-														</div>
-														<div className="">
-															<button
-																className="size-10 bg-greenly text-white rounded-full flex items-center justify-center"
-															>
-																<ArrowUpRight className="size-6" />
-															</button>
-														</div>
+													<div className="">
+														<button className="size-10 bg-greenly text-white rounded-full flex items-center justify-center">
+															<ArrowUpRight className="size-6" />
+														</button>
 													</div>
 												</div>
 											</div>
-										</SwiperSlide>
-									))}
-								</Swiper>
-							</div>
+										</div>
+									</SwiperSlide>
+								))}
+							</Swiper>
+						</div>
 
-							<div className="flex items-center justify-start gap-4 mt-4">
-								<button
-									onClick={() => swiperInstance?.slidePrev()}
-									className="size-10 bg-greenly text-white rounded-full flex items-center justify-center"
-								>
-									<ArrowLeft className="size-6" />
-								</button>
-								<button
-									onClick={() => swiperInstance?.slideNext()}
-									className="size-10 bg-greenly text-white rounded-full flex items-center justify-center"
-								>
-									<ArrowRight className="size-6" />
-								</button>
-							</div>
+						<div className="flex items-center justify-start gap-4 mt-4">
+							<button
+								onClick={() => swiperInstance?.slidePrev()}
+								className="size-10 bg-greenly text-white rounded-full flex items-center justify-center"
+							>
+								<ArrowLeft className="size-6" />
+							</button>
+							<button
+								onClick={() => swiperInstance?.slideNext()}
+								className="size-10 bg-greenly text-white rounded-full flex items-center justify-center"
+							>
+								<ArrowRight className="size-6" />
+							</button>
 						</div>
 					</div>
 				</div>

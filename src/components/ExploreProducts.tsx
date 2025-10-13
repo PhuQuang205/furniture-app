@@ -6,7 +6,7 @@ import { CardProduct } from "@/components/CardProduct";
 export const ExploreProducts = () => {
 	const [products, setProducts] = useState<PropsProducts[]>([]);
 	const [loading, setLoading] = useState(false);
-	console.log("+ Respone: ", products);
+	
 	useEffect(() => {
 		const fetchProduct = async () => {
 			setLoading(true);

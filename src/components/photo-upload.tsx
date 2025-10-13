@@ -1,7 +1,6 @@
 "use client";
 
 import type React from "react";
-
 import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -9,53 +8,55 @@ import { ImagePlus } from "lucide-react";
 
 interface PhotoUploadProps {
 	onPhotoSelect?: (file: File) => void;
+	initialImage?: string | null;
+	disabled?: boolean;
 }
 
-export function PhotoUpload({ onPhotoSelect }: PhotoUploadProps) {
+export function PhotoUpload({
+	disabled,
+	onPhotoSelect,
+	initialImage,
+}: PhotoUploadProps) {
 	const [dragActive, setDragActive] = useState(false);
-	const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);
+	const [selectedPhoto, setSelectedPhoto] = useState<string | null>(
+		initialImage || null
+	);
 	const fileInputRef = useRef<HTMLInputElement>(null);
 
 	const handleDrag = (e: React.DragEvent) => {
+		if (disabled) return;
 		e.preventDefault();
 		e.stopPropagation();
-		if (e.type === "dragenter" || e.type === "dragover") {
-			setDragActive(true);
-		} else if (e.type === "dragleave") {
-			setDragActive(false);
-		}
-	};
-
-	const handleDrop = (e: React.DragEvent) => {
-		e.preventDefault();
-		e.stopPropagation();
-		setDragActive(false);
-
-		if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-			handleFile(e.dataTransfer.files[0]);
-		}
+		if (e.type === "dragenter" || e.type === "dragover") setDragActive(true);
+		else if (e.type === "dragleave") setDragActive(false);
 	};
 
 	const handleFile = (file: File) => {
+		if (disabled) return;
 		if (file.type.startsWith("image/")) {
 			const reader = new FileReader();
-			reader.onload = (e) => {
-				setSelectedPhoto(e.target?.result as string);
-			};
+			reader.onload = (e) => setSelectedPhoto(e.target?.result as string);
 			reader.readAsDataURL(file);
 			onPhotoSelect?.(file);
 		}
 	};
 
-	const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-		if (e.target.files && e.target.files[0]) {
-			handleFile(e.target.files[0]);
-		}
+	const handleDrop = (e: React.DragEvent) => {
+		if (disabled) return;
+
+		e.preventDefault();
+		e.stopPropagation();
+		setDragActive(false);
+		if (e.dataTransfer.files?.[0]) handleFile(e.dataTransfer.files[0]);
 	};
 
-	const openFileDialog = () => {
-		fileInputRef.current?.click();
+	const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+		if (disabled) return;
+
+		if (e.target.files?.[0]) handleFile(e.target.files[0]);
 	};
+
+	const openFileDialog = () => fileInputRef.current?.click();
 
 	return (
 		<div className="space-y-2">
@@ -73,11 +74,15 @@ export function PhotoUpload({ onPhotoSelect }: PhotoUploadProps) {
 					<div className="space-y-2 flex flex-col items-center mt-4">
 						<div className="w-20 h-20 mx-auto rounded-full overflow-hidden">
 							<Image
-								src={selectedPhoto || "/placeholder.svg"}
+								src={
+									selectedPhoto ||
+									"https://i.pinimg.com/736x/03/5c/40/035c409a7450fe3149baec88d278d8b0.jpg"
+								}
+								unoptimized
 								alt="Profile preview"
 								className="size-20 object-cover"
-								width={500}
-								height={500}
+								width={80}
+								height={80}
 							/>
 						</div>
 						<p className="text-sm text-black">Chọn ảnh khác</p>
@@ -94,12 +99,14 @@ export function PhotoUpload({ onPhotoSelect }: PhotoUploadProps) {
 					accept="image/*"
 					onChange={handleFileInput}
 					className="hidden"
+					disabled={disabled}
 				/>
 				<Button
 					type="button"
 					variant="outline"
+					disabled={disabled}
 					onClick={openFileDialog}
-					className="w-full text-greenly font-semibold hover:bg-transparent   hover:text-greenly/90 border-none bg-transparent shadow-none"
+					className="w-full text-greenly font-semibold hover:bg-transparent hover:text-greenly/90 border-none bg-transparent shadow-none"
 				>
 					Browse
 				</Button>

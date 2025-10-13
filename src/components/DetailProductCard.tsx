@@ -1,7 +1,10 @@
 "use client";
 
+// import { useDispatch } from "react-redux";
+
 import { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
 	ChevronLeft,
@@ -31,6 +34,7 @@ import { cn } from "@/lib/utils";
 import { PropDetailProduct } from "@/lib/services/productService";
 import { Badge } from "@/components/ui/badge";
 import { addToCart } from "@/lib/services/cartService";
+// import { addItem as addToCartAction } from "@/lib/redux/cartSlice";
 import { toast } from "sonner";
 
 interface DetailProductCardProps {
@@ -44,13 +48,16 @@ const tabs = [
 ];
 
 export const DetailProductCard = ({ product }: DetailProductCardProps) => {
+	// const dispatch = useDispatch();
+
+	const route = useRouter();
 	const [currentImage, setCurrentImage] = useState(0);
 	const [quantity, setQuantity] = useState(1);
 	const [activeTab, setActiveTab] = useState("description");
 	const [isWishlisted, setIsWishlisted] = useState(false);
 
 	const productImages = product?.images?.map((img) => img.imageUrl) || [
-		"/placeholder.svg",
+		"https://i.pinimg.com/736x/03/5c/40/035c409a7450fe3149baec88d278d8b0.jpg",
 	];
 
 	const handlePrevImage = () => {
@@ -76,15 +83,19 @@ export const DetailProductCard = ({ product }: DetailProductCardProps) => {
 	const handleAddCart = async () => {
 		if (!product) return;
 
-		const newCart = {
-			productId: Number(product.id),
-			quantity: quantity,
-		};
+		// const newCartItem = {
+		// 	productId: product.id,
+		// 	productName: product.name,
+		// 	price: product.finalPrice,
+		// 	quantity: quantity,
+		// };
 
-		console.log("+ New cart: ", newCart);
-
+		// dispatch(addToCartAction(newCartItem));
 		try {
-			const res = await addToCart(newCart);
+			const res = await addToCart({
+				productId: Number(product.id),
+				quantity: quantity,
+			});
 
 			if (res || res.message) {
 				toast.success(`Đã thêm ${product.name} vào giỏ hàng`);
@@ -92,11 +103,14 @@ export const DetailProductCard = ({ product }: DetailProductCardProps) => {
 				toast.error("Thêm sản phẩm vào giỏ hàng thất bại!");
 			}
 		} catch (error) {
-			console.error(
-				"❌ Lỗi thêm giỏ hàng:"
-			);
+			console.error("❌ Lỗi thêm giỏ hàng:", error);
 			toast.error("Thêm sản phẩm vào giỏ hàng thất bại!");
 		}
+	};
+
+	const handleBuyProduct = () => {
+		handleAddCart();
+		route.push("/shopping-cart/checkout");
 	};
 
 	return (
@@ -152,8 +166,7 @@ export const DetailProductCard = ({ product }: DetailProductCardProps) => {
 						</div>
 					</div>
 
-					{/* 📦 Right - Product Details */}
-					<div className="p-8">
+					<div className="">
 						<p className="text-gray-500 text-sm mb-2">
 							{product?.category.name || "Category"}
 						</p>
@@ -244,7 +257,10 @@ export const DetailProductCard = ({ product }: DetailProductCardProps) => {
 								<ShoppingCart className="size-5" />
 								Thêm vào giỏ hàng
 							</Button>
-							<Button className="bg-yelly hover:bg-yelly/80 text-white cursor-pointer h-12 px-6">
+							<Button
+								onClick={handleBuyProduct}
+								className="bg-yelly hover:bg-yelly/80 text-white cursor-pointer h-12 px-6"
+							>
 								<span className="text-black">Mua ngay</span>
 								<Wallet className="size-5 text-black" />
 							</Button>
@@ -263,79 +279,70 @@ export const DetailProductCard = ({ product }: DetailProductCardProps) => {
 								))}
 							</div>
 						</div>
-					</div>
-				</div>
+						<div className="bg-white rounded-lg mt-8">
+							<div className="flex gap-8 border-b border-gray-200 mb-8">
+								{tabs.map((tab) => (
+									<button
+										key={tab.key}
+										onClick={() => setActiveTab(tab.key)}
+										className={cn(
+											"pb-4 text-md font-medium transition-colors relative",
+											activeTab === tab.key
+												? "text-gray-900"
+												: "text-gray-400 hover:text-gray-600"
+										)}
+									>
+										{tab.label}
+										{activeTab === tab.key && (
+											<div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gray-900" />
+										)}
+									</button>
+								))}
+							</div>
 
-				<div className="bg-white rounded-lg p-8 mt-8">
-					<div className="flex gap-8 border-b border-gray-200 mb-8">
-						{tabs.map((tab) => (
-							<button
-								key={tab.key}
-								onClick={() => setActiveTab(tab.key)}
-								className={cn(
-									"pb-4 text-md font-medium transition-colors relative",
-									activeTab === tab.key
-										? "text-gray-900"
-										: "text-gray-400 hover:text-gray-600"
-								)}
-							>
-								{tab.label}
-								{activeTab === tab.key && (
-									<div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gray-900" />
-								)}
-							</button>
-						))}
-					</div>
+							{activeTab === "description" && (
+								<div className="text-gray-600 leading-relaxed">
+									<p>
+										{product?.fullDescription || "No description available."}
+									</p>
+								</div>
+							)}
 
-					{activeTab === "description" && (
-						<div className="text-gray-600 leading-relaxed">
-							<p>{product?.fullDescription || "No description available."}</p>
+							{activeTab === "additional" && (
+								<div className="overflow-hidden rounded-xl bg-white shadow-sm">
+									<Table className="border border-gray-200 rounded-lg">
+										<TableHeader>
+											<TableRow className="bg-yelly">
+												<TableHead className="font-semibold text-gray-900 w-1/3">
+													Thuộc tính
+												</TableHead>
+												<TableHead className="font-semibold text-gray-900">
+													Thông tin
+												</TableHead>
+											</TableRow>
+										</TableHeader>
+
+										<TableBody>
+											{product?.details.map((detail, index) => (
+												<TableRow key={index}>
+													<TableCell className="text-gray-600">
+														{detail.name}
+													</TableCell>
+													<TableCell className="text-gray-800 font-medium">
+														{detail.value}
+													</TableCell>
+												</TableRow>
+											))}
+										</TableBody>
+									</Table>
+								</div>
+							)}
+
+							{activeTab === "review" && (
+								<div className="text-gray-600">No reviews yet.</div>
+							)}
 						</div>
-					)}
-
-					{activeTab === "additional" && (
-						<div className="overflow-hidden rounded-xl bg-white shadow-sm">
-							<Table className="border border-gray-200 rounded-lg">
-								<TableHeader>
-									<TableRow className="bg-yelly">
-										<TableHead className="font-semibold text-gray-900 w-1/3">
-											Thuộc tính
-										</TableHead>
-										<TableHead className="font-semibold text-gray-900">
-											Thông tin
-										</TableHead>
-									</TableRow>
-								</TableHeader>
-
-								<TableBody>
-									<TableRow>
-										<TableCell className="text-gray-600">Trọng lượng</TableCell>
-										<TableCell className="text-gray-800 font-medium">
-											25 kg
-										</TableCell>
-									</TableRow>
-
-									<TableRow>
-										<TableCell className="text-gray-600">Kích thước</TableCell>
-										<TableCell className="text-gray-800 font-medium">
-											70 × 70 × 130 cm
-										</TableCell>
-									</TableRow>
-
-									<TableRow>
-										<TableCell className="text-gray-600">Danh mục</TableCell>
-										<TableCell className="text-gray-800 font-medium">
-											{product?.category?.name || "Không xác định"}
-										</TableCell>
-									</TableRow>
-								</TableBody>
-							</Table>
-						</div>
-					)}
-
-					{activeTab === "review" && (
-						<div className="text-gray-600">No reviews yet.</div>
-					)}
+					</div>
 				</div>
 			</div>
 		</div>

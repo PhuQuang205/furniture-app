@@ -27,9 +27,9 @@ export const TextRunSection = () => {
 								<Image
 									src={item.image}
 									alt={item.id.toString()}
-									className=""
+									className="w-auto h-auto"
 									width={200}
-									height={100}
+									height={100}									
 								/>
 							</div>
 						))}

@@ -1,18 +1,134 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+
 import BreadcrumbHeader from "@/components/breadcrumb-header";
-import Link from "next/link";
+
+import { PROVINCES, Province } from "@/context/provinces";
+import { PAYMENT_METHODS, CheckoutData, orderItems } from "@/lib/services/orderService";
+import { WARDS, Ward } from "@/context/wards";
+import {
+	getAllSummary,
+	getShippingFee,
+	Summary,
+} from "@/lib/services/orderService";
+import { CommitSection } from "@/components/section/commit-section";
+import { toast } from "sonner";
 
 export default function Checkout() {
-	const [paymentMethod, setPaymentMethod] = useState("paypal");
+	const route = useRouter()
+	const [sumary, setSumary] = useState<Summary | null>(null);
+	const [filteredWards, setFilteredWards] = useState<Ward[]>([]);
+	const [loading, setLoading] = useState(false);
+	const [shippingFee, setShippingFee] = useState<number>(0);
+	const [loadingFee, setLoadingFee] = useState(false);
+	const [checkoutData, setCheckoutData] = useState<CheckoutData>({
+		firstName: "",
+		lastName: "",
+		email: "",
+		phoneNumber: "",
+		addressLine: "",
+		provinceCode: 0,
+		provinceName: "",
+		wardName: "",
+		paymentMethod: "COD",
+		estimatedShippingFee: 0,
+	});
 
-	const subtotal = 740;
-	const discount = 100;
-	const total = subtotal - discount;
+	const handleOrder = async () => {
+		setLoading(true);
+		try {
+			const res = await orderItems(checkoutData);
+			console.log(res)
+			if(res.status === 201){
+				route.push("/order")
+				toast.success("Order thành công!")
+			}
+		} catch (error) {
+			console.log("Error: ", error)
+		}
+	}
+
+	const handleSelectWard = (val: string) => {
+		const ward = WARDS.find((item) => item.codename === val);
+		if (ward) {
+			setCheckoutData((prev) => ({ ...prev, wardName: ward?.name }));
+		}
+	};
+
+	const handleProvinceChange = async (value: string) => {
+		// setSelectedProvince(value);
+
+		const province = PROVINCES.find((p: Province) => p.codename === value);
+
+		if (province) {
+			const wardsByProvince = WARDS.filter(
+				(w: Ward) => w.province_code === province.code
+			);
+			setFilteredWards(wardsByProvince);
+
+			setLoadingFee(true);
+			try {
+				const res = await getShippingFee(province.code);
+				setShippingFee(res.fee ?? 0);
+				setCheckoutData((pre) => ({
+					...pre,
+					provinceCode: province.code,
+					provinceName: province.name,
+					estimatedShippingFee: res.fee,
+				}));
+			} catch (error) {
+				console.log("error", error);
+				setShippingFee(0);
+			} finally {
+				setLoadingFee(false);
+			}
+		} else {
+			setFilteredWards([]);
+			setShippingFee(0);
+		}
+	};
+
+	const handleCheckoutData = (
+		field: keyof CheckoutData,
+		val: string | number
+	) => {
+		setCheckoutData((pre) => ({ ...pre, [field]: val }));
+	};
+
+	const subtotal = sumary?.subTotal ?? 0;
+	const total = subtotal + shippingFee;
+
+	useEffect(() => {
+		const fetchSumary = async () => {
+			setLoading(true);
+			try {
+				const res = await getAllSummary();
+				setSumary(res);
+			} catch (error) {
+				console.log("Error: ", error);
+			} finally {
+				setLoading(false);
+			}
+		};
+
+		fetchSumary();
+	}, []);
 
 	return (
 		<div>
@@ -20,42 +136,196 @@ export default function Checkout() {
 				title="Thanh toán"
 				breadcrumbs={[
 					{ label: "Trang chủ", href: "/" },
-					{ label: "Giỏ hàng", href: "/cart" },
+					{ label: "Giỏ hàng", href: "/shopping-cart" },
 					{ label: "Thanh toán" },
 				]}
 			/>
 
-			<div className="container mx-auto py-10 px-4 grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-6">
-				{/* LEFT: Payment Methods */}
-				<Card className="rounded-xl">
-					<CardHeader>
-						<CardTitle>Chọn phương thức thanh toán</CardTitle>
-					</CardHeader>
-					<CardContent className="space-y-4">
-						<RadioGroup
-							value={paymentMethod}
-							onValueChange={setPaymentMethod}
-							className="space-y-3"
-						>
-							<label className="flex items-center justify-between border rounded-lg p-3 cursor-pointer">
-								<div className="flex items-center gap-3">
-									<RadioGroupItem value="paypal" />
-									<span>Tài khoản ngân hàng</span>
-								</div>
-							</label>
+			<div className="container mx-auto py-16 px-4 grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-6">
+				<div className="">
+					<h1 className="text-xl font-semibold pb-8">Chi tiết thanh toán</h1>
+					<form className="space-y-6">
+						<div className="grid grid-cols-2 gap-4">
+							<div className="space-y-2">
+								<Label
+									htmlFor="firstName"
+									className="text-md font-semibold text-black"
+								>
+									Họ
+								</Label>
+								<Input
+									id="firstName"
+									type="text"
+									placeholder="Nhập họ"
+									className="h-12 border-gray-300 px-5"
+									onChange={(e) =>
+										handleCheckoutData("firstName", e.target.value)
+									}
+								/>
+							</div>
+							<div className="space-y-2">
+								<Label
+									htmlFor="lastName"
+									className="text-md font-semibold text-black"
+								>
+									Tên
+								</Label>
+								<Input
+									id="lastName"
+									type="text"
+									placeholder="Nhập tên"
+									className="h-12 px-5 border-gray-300"
+									onChange={(e) =>
+										handleCheckoutData("lastName", e.target.value)
+									}
+								/>
+							</div>
+						</div>
 
-							{/* COD */}
-							<label className="flex items-center justify-between border rounded-lg p-3 cursor-pointer">
-								<div className="flex items-center gap-3">
-									<RadioGroupItem value="cod" />
-									<span>Thanh toán khi nhận hàng</span>
-								</div>
-							</label>
-						</RadioGroup>
-					</CardContent>
-				</Card>
+						<div className="space-y-2">
+							<Label
+								htmlFor="email"
+								className="text-md text-black font-semibold"
+							>
+								Email
+							</Label>
+							<Input
+								id="email"
+								type="email"
+								placeholder="Nhập địa chỉ email"
+								className="h-12 border-gray-300 px-5"
+								onChange={(e) => handleCheckoutData("email", e.target.value)}
+							/>
+						</div>
 
-				{/* RIGHT: Order Summary */}
+						<div className="space-y-2">
+							<Label
+								htmlFor="phone"
+								className="text-md text-black font-semibold"
+							>
+								Nhập số điện thoại
+							</Label>
+							<div className="relative">
+								<Input
+									id="phone"
+									type="text"
+									placeholder="Nhập số điện thoại"
+									className="h-12 pr-10 border-gray-300 px-5"
+									onChange={(e) =>
+										handleCheckoutData("phoneNumber", e.target.value)
+									}
+								/>
+							</div>
+						</div>
+						<div className="space-y-2">
+							<Label
+								htmlFor="phone"
+								className="text-md text-black font-semibold"
+							>
+								Địa chỉ nhận hàng
+							</Label>
+							<div className="relative">
+								<Input
+									id="phone"
+									type="text"
+									placeholder="Nhập địa chỉ nhận hàng"
+									className="h-12 pr-10 border-gray-300 px-5"
+									onChange={(e) =>
+										handleCheckoutData("addressLine", e.target.value)
+									}
+								/>
+							</div>
+						</div>
+						<div className="flex flex-col lg:flex-row gap-4">
+							<div className="flex-1 space-y-2">
+								<Label
+									htmlFor="phone"
+									className="text-md text-black font-semibold"
+								>
+									Thành phố hoặc tỉnh
+								</Label>
+								<Select onValueChange={handleProvinceChange}>
+									<SelectTrigger className="w-full h-12">
+										<SelectValue placeholder="Chọn thành phố hoặc tỉnh" />
+									</SelectTrigger>
+									<SelectContent>
+										{PROVINCES.map((province) => (
+											<SelectItem
+												key={province.phone_code}
+												value={province.codename}
+											>
+												{province.name}
+											</SelectItem>
+										))}
+									</SelectContent>
+								</Select>
+							</div>
+							<div className="flex-1 space-y-2 ">
+								<Label
+									htmlFor="phone"
+									className="text-md text-black font-semibold"
+								>
+									Xã
+								</Label>
+								<Select
+									disabled={!filteredWards.length}
+									onValueChange={handleSelectWard}
+								>
+									<SelectTrigger className="w-full h-12">
+										<SelectValue
+											placeholder={
+												filteredWards.length
+													? "Chọn xã"
+													: "Chọn thành phố trước"
+											}
+										/>
+									</SelectTrigger>
+									<SelectContent>
+										{filteredWards.map((ward: Ward) => (
+											<SelectItem
+												key={`${ward.province_code}-${ward.code}`}
+												value={ward.codename}
+											>
+												{ward.name}
+											</SelectItem>
+										))}
+									</SelectContent>
+								</Select>
+							</div>
+						</div>
+						<div className="space-y-2">
+							<Label
+								htmlFor="phone"
+								className="text-md text-black font-semibold"
+							>
+								Phương thức thanh toán
+							</Label>
+							<RadioGroup
+								defaultValue="COD"
+								className="flex flex-col gap-4 lg:flex-row items-center"
+								onValueChange={(val) =>
+									setCheckoutData((prev) => ({ ...prev, paymentMethod: val }))
+								}
+							>
+								{PAYMENT_METHODS.map((method) => (
+									<div
+										key={method.id}
+										className="flex-1 flex items-center space-x-2 border border-gray-300 h-12 px-4 rounded-full cursor-pointer"
+									>
+										<RadioGroupItem value={method.value} id={method.id} />
+										<Label
+											htmlFor={method.id}
+											className="text-muted-foreground font-medium"
+										>
+											{method.label}
+										</Label>
+									</div>
+								))}
+							</RadioGroup>
+						</div>
+					</form>
+				</div>
+
 				<Card className="h-fit rounded-xl">
 					<CardHeader>
 						<CardTitle>Tóm tắt đơn hàng</CardTitle>
@@ -63,34 +333,35 @@ export default function Checkout() {
 					<CardContent className="space-y-2 text-sm text-gray-700">
 						<div className="flex justify-between">
 							<span>Sản phẩm</span>
-							<span>9</span>
+							{loading ? "Đang tính ..." : <span>{sumary?.items}</span>}
 						</div>
 						<div className="flex justify-between">
 							<span>Tạm tính</span>
-							<span>${subtotal.toFixed(2)}</span>
+							{loading ? (
+								"Đang tính ..."
+							) : (
+								<span>{sumary?.subTotal.toLocaleString()} VNĐ</span>
+							)}
 						</div>
 						<div className="flex justify-between">
 							<span>Vận chuyển</span>
-							<span>$0.00</span>
-						</div>
-						<div className="flex justify-between">
-							<span>Thuế</span>
-							<span>$0.00</span>
-						</div>
-						<div className="flex justify-between text-red-600">
-							<span>Giảm giá</span>
-							<span>- ${discount.toFixed(2)}</span>
+							{loadingFee ? (
+								"Dang tinh ..."
+							) : (
+								<span>{shippingFee.toLocaleString()} VNĐ</span>
+							)}
 						</div>
 						<div className="flex justify-between font-semibold text-gray-900 border-t pt-2">
 							<span>Tổng cộng</span>
-							<span>${total.toFixed(2)}</span>
+							<span>${total.toLocaleString()} VNĐ</span>
 						</div>
-						<Button className="mt-4 w-full rounded-full bg-[#2F5233] text-white hover:bg-[#243F26]">
+						<Button className="mt-4 w-full h-12 rounded-full bg-greenly text-white hover:bg-greenly/90 cursor-pointer" onClick={handleOrder}>
 							<Link href="/order">Xác nhận thanh toán</Link>
 						</Button>
 					</CardContent>
 				</Card>
 			</div>
+			<CommitSection />
 		</div>
 	);
 }

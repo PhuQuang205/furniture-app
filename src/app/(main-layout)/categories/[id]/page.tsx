@@ -1,12 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 import {
 	Breadcrumb,
 	BreadcrumbItem,
 	BreadcrumbLink,
 	BreadcrumbList,
-	BreadcrumbPage,
 	BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import Image from "next/image";
@@ -18,7 +18,12 @@ import {
 import { CardProduct } from "@/components/CardProduct";
 import { CommitSection } from "@/components/section/commit-section";
 import { getCategories, PropsCategory } from "@/lib/services/categoryService";
-import Link from "next/link";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const DetailCategoty = () => {
 	const { id } = useParams();
@@ -32,7 +37,7 @@ const DetailCategoty = () => {
 			setLoading(true);
 			try {
 				const res = await getProductByCategoryId(Number(id));
-				const resCate = setProducts(res.data);
+				setProducts(res.data);
 			} catch (error) {
 				console.log(error);
 			} finally {
@@ -67,9 +72,11 @@ const DetailCategoty = () => {
 	return (
 		<div className="overflow-hidden">
 			<div className="container mx-auto px-8 lg:px-4">
-				<div className="flex flex-col md:flex-row md:items-center items-start justify-between gap-8 my-8 lg:my-16">
+				<div className="flex flex-col md:flex-row md:items-center items-start justify-between gap-8 my-8">
 					<div className="max-sm:w-full flex-none flex flex-col justify-center items-start">
-						<h1 className="text-xl font-semibold text-black">{categoryCurrent?.name}</h1>
+						<h1 className="text-xl font-semibold text-black">
+							{categoryCurrent?.name}
+						</h1>
 						<Breadcrumb>
 							<BreadcrumbList>
 								<BreadcrumbItem>
@@ -82,34 +89,47 @@ const DetailCategoty = () => {
 									<BreadcrumbLink asChild>
 										<Link href="">{categoryCurrent?.name}</Link>
 									</BreadcrumbLink>
-								</BreadcrumbItem>								
+								</BreadcrumbItem>
 							</BreadcrumbList>
 						</Breadcrumb>
 					</div>
-					<div className="max-md:w-full">
-						<div className="flex justify-start gap-4">
-							<div className="flex-none flex gap-4">
-								{categories.map((item) => {
-									return (
-										<div key={item.id} className="flex flex-col gap-2">
-											<div className="size-[300px] max-sm:size-[200px] rounded-lg overflow-hidden">
+					<div className="w-full">
+						<Swiper
+							modules={[Navigation, Pagination]}
+							spaceBetween={20}
+							slidesPerView={2}
+							breakpoints={{
+								640: { slidesPerView: 3 },
+								1024: { slidesPerView: 4 },
+								1280: { slidesPerView: 5 },
+							}}
+							navigation
+							pagination={{ clickable: true }}
+							className="!pb-8 category-swiper"
+						>
+							{categories.map((item) => (
+								<SwiperSlide key={item.id}>
+									<Link href={`/categories/${item.id}`} className="block">
+										<div className="flex flex-col gap-2 items-center cursor-pointer hover:opacity-90 transition">
+											<div className="rounded-lg overflow-hidden w-full aspect-square bg-gray-100">
 												<Image
 													src={
-														item.image ||
-														"https://static.vecteezy.com/system/resources/thumbnails/004/141/669/small_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg"
-													}
+														item.image || "https://i.pinimg.com/736x/03/5c/40/035c409a7450fe3149baec88d278d8b0.jpg"}
 													alt={item.alias}
-													width={500}
-													height={500}
-													className="size-full object-cover"
+													width={300}
+													height={300}
+													className="object-cover w-full h-full"
+													priority
 												/>
 											</div>
-											<p>{item.name}</p>
+											<p className="font-medium text-sm sm:text-base">
+												{item.name}
+											</p>
 										</div>
-									);
-								})}
-							</div>
-						</div>
+									</Link>
+								</SwiperSlide>
+							))}
+						</Swiper>
 					</div>
 				</div>
 				<div className="py-8 lg:py-16 border-t border-gray-600">

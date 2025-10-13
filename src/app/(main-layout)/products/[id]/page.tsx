@@ -23,7 +23,6 @@ const ProductDetail = () => {
 			try {
 				const res = await getProductById(Number(id));
 				setProduct(res);
-				console.log("+ Respone: ", res);
 			} catch (error) {
 				console.error(error);
 				toast.error("Không thể tải thông tin sản phẩm");

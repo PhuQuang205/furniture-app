@@ -7,11 +7,6 @@ export interface PropsCategory {
     image?: string,
 }
 
-/**
- * Lấy danh sách tất cả danh mục sản phẩm
- * @returns Mảng các category
- */
-
 export const getCategories = async () => {
   try {
     const res = await api.get("/categories");
