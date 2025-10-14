@@ -55,7 +55,7 @@ export interface Order {
 	total: number;
 	deliverDays: number;
 	deliverDate: string | null;
-	status: "NEW" | "PROCESSING" | "COMPLETED" | "CANCELLED"; 
+	status: "NEW" | "PROCESSING"| "CANCELLED" | "PICKED" | "PACKAGED" | "SHIPPING" | "DELIVERED" | "RETURN_REQUESTED" | "RETURNED" | "RETURN_REJECTED"; 
 	paymentMethod: MethodPayment;
 	paymentStatus: "PENDING" | "PAID" | "FAILED";
 	details: OrderDetail[];

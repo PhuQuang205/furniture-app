@@ -2,13 +2,13 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Order } from "@/lib/services/orderService";
+import Link from "next/link";
 
 interface PropOrder {
 	order: Order;
 }
 
 export const OrderCard = ({ order }: PropOrder) => {
-	console.log(order);
 	return (
 		<div className="rounded-2xl overflow-hidden border border-gray-300">
 			<div className="bg-yelly">
@@ -46,7 +46,10 @@ export const OrderCard = ({ order }: PropOrder) => {
 						<div key={item.productId} className="flex items-center gap-4">
 							<div className="size-24 flex items-center justify-center bg-subbg rounded-lg">
 								<Image
-									src={item.imageUrl ?? "https://i.pinimg.com/1200x/fe/72/50/fe725093cc70ce613ee7269ac25a1bab.jpg"}
+									src={
+										item.imageUrl ??
+										"https://i.pinimg.com/1200x/fe/72/50/fe725093cc70ce613ee7269ac25a1bab.jpg"
+									}
 									alt={item.productName}
 									width={50}
 									height={50}
@@ -56,7 +59,9 @@ export const OrderCard = ({ order }: PropOrder) => {
 							</div>
 							<div className="flex flex-col">
 								<h3 className="font-medium text-md">{item.productName}</h3>
-								<p className="text-sm text-black/60">Số lượng: {item.quantity}</p>
+								<p className="text-sm text-black/60">
+									Số lượng: {item.quantity}
+								</p>
 							</div>
 						</div>
 					))}
@@ -66,16 +71,24 @@ export const OrderCard = ({ order }: PropOrder) => {
 			<div className="p-4">
 				{order.paymentStatus === "PENDING" && (
 					<div className="flex gap-2">
-						<Badge variant="outline" className="rounded-full bg-yellow-100 text-yellow-800 border-yellow-300">
+						<Badge
+							variant="outline"
+							className="rounded-full bg-yellow-100 text-yellow-800 border-yellow-300"
+						>
 							Đang chờ thanh toán
 						</Badge>
-						<p className="text-sm text-greenly">Đơn hàng của bạn đang chờ thanh toán</p>
+						<p className="text-sm text-greenly">
+							Đơn hàng của bạn đang chờ thanh toán
+						</p>
 					</div>
 				)}
 
 				{order.paymentStatus === "PAID" && (
 					<div className="flex gap-2">
-						<Badge variant="outline" className="rounded-full bg-green-100 text-green-800 border-green-300">
+						<Badge
+							variant="outline"
+							className="rounded-full bg-green-100 text-green-800 border-green-300"
+						>
 							Đã thanh toán
 						</Badge>
 						<p className="text-sm text-green-700">Thanh toán thành công</p>
@@ -84,39 +97,48 @@ export const OrderCard = ({ order }: PropOrder) => {
 
 				{order.paymentStatus === "FAILED" && (
 					<div className="flex gap-2">
-						<Badge variant="outline" className="rounded-full bg-red-100 text-red-800 border-red-300">
+						<Badge
+							variant="outline"
+							className="rounded-full bg-red-100 text-red-800 border-red-300"
+						>
 							Thanh toán thất bại
 						</Badge>
-						<p className="text-sm text-red-700">Vui lòng thử lại hoặc chọn phương thức khác</p>
+						<p className="text-sm text-red-700">
+							Vui lòng thử lại hoặc chọn phương thức khác
+						</p>
 					</div>
 				)}
 
 				{/* Hiển thị trạng thái xử lý đơn hàng */}
 				<div className="mt-4">
 					{order.status === "NEW" && (
-						<p className="text-sm text-blue-600">Đơn hàng của bạn đang chờ duyệt</p>
+						<p className="text-sm text-blue-600">
+							Đơn hàng của bạn đang chờ duyệt
+						</p>
 					)}
 					{order.status === "PROCESSING" && (
-						<p className="text-sm text-orange-600">Đơn hàng của bạn đang được xử lý</p>
-					)}
-					{order.status === "COMPLETED" && (
-						<p className="text-sm text-green-700">Đơn hàng đã hoàn tất</p>
+						<p className="text-sm text-orange-600">
+							Đơn hàng của bạn đang được xử lý
+						</p>
 					)}
 					{order.status === "CANCELLED" && (
 						<p className="text-sm text-gray-500">Đơn hàng đã bị hủy</p>
 					)}
 				</div>
 
-				{/* Hành động */}
 				<div className="mt-8 flex justify-between items-center">
 					<div className="flex gap-1.5">
-						<Button>Theo dõi</Button>
+						<Button>
+							<Link href={`/order/${order.id}/track-order`}>Theo dõi</Link>
+						</Button>
 						<Button variant="outline">Hóa đơn</Button>
 					</div>
 
-					{/* Chỉ cho phép hủy nếu chưa thanh toán */}
 					{order.paymentStatus === "PENDING" && (
-						<Button variant="empty" className="cursor-pointer hover:bg-white/10">
+						<Button
+							variant="empty"
+							className="cursor-pointer hover:bg-white/10"
+						>
 							Hủy đơn
 						</Button>
 					)}

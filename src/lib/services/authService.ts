@@ -16,6 +16,24 @@ export interface CustomerRequest {
 	phoneNumber: string;
 }
 
+
+export interface RegisterRequest {
+	firstName: string;
+	lastName: string;
+	email: string;
+	password: string;
+}
+
+export interface RegisterResponse {
+	message: string;
+	email: string;
+}
+
+export interface VerifyResponse {
+	message: string;
+	status?: string; 
+}
+
 export const login = async (email: string, password: string) => {
 	const res = await api.post("/oauth/login", { email, password });
 	const { accessToken, customer } = res.data;
@@ -52,4 +70,22 @@ export const updateCustomer = async (customer: CustomerRequest, avatar?: File) =
   return res;
 };
 
+export const registerUser = async (payload: RegisterRequest): Promise<RegisterResponse> => {
+	try {
+		const res = await api.post("/oauth/register", payload);
+		return res.data as RegisterResponse;
+	} catch (error) {
+		console.error("Failed to register:", error);
+		throw error;
+	}
+};
 
+export const verifyAccount = async (email: string, otp: string): Promise<VerifyResponse> => {
+	try {
+		const res = await api.post("/oauth/verify", { email, otp });
+		return res.data as VerifyResponse;
+	} catch (error) {
+		console.error("Failed to verify account:", error);
+		throw error;
+	}
+};
