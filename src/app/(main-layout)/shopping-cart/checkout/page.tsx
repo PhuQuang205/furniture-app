@@ -35,6 +35,7 @@ import { CommitSection } from "@/components/section/commit-section";
 import { toast } from "sonner";
 import { checkoutServiceStripe } from "@/lib/services/checkoutService";
 const API_BASE = "http://localhost:80/api/checkout";
+
 export default function Checkout() {
 	const route = useRouter();
 	const [sumary, setSumary] = useState<Summary | null>(null);
@@ -64,8 +65,8 @@ export default function Checkout() {
 
 			if (res) {
 				const orderId = res.orderId;
-				route.push("/order");
-				toast.success("Tạo đơn hàng thành công!");
+				// route.push("/order");
+				// toast.success("Tạo đơn hàng thành công!");
 
 				if (checkoutData.paymentMethod === "COD") {
 					route.push("/order");
@@ -78,7 +79,7 @@ export default function Checkout() {
 						headers: {
 							"Content-Type": "application/json",
 						},
-						body: JSON.stringify(orderId),
+						body: JSON.stringify({ orderId }),
 					});
 
 					if (!res.ok) {
@@ -94,6 +95,29 @@ export default function Checkout() {
 					} else {
 						alert("Không tạo được phiên thanh toán Stripe");
 						console.error("Stripe response:", data);
+					}
+				} else if (checkoutData.paymentMethod === "ZALOPAY") {
+					const res = await fetch(`${API_BASE}/zalopay/create`, {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({ orderId }),
+					});
+
+					if (!res.ok) {
+						const errText = await res.text();
+						throw new Error(`Stripe API lỗi: ${errText}`);
+					}
+
+					const data = await res.json();
+
+					if (data.order_url) {
+						// mở popup ZaloPay để thanh toán
+						// window.open(data.order_url, "_blank");
+						window.location.href = data.order_url;
+					} else {
+						toast.error("Không tạo được đơn ZaloPay");
 					}
 				}
 			} else {
