@@ -1,6 +1,6 @@
-# 🛋️ Furniture Shop — Fullstack E-Commerce Platform
+# 🛋️ Furniture Shop - Fullstack E-Commerce Platform
 
-**Furniture Shop** is a full-stack web application that simulates an online shopping experience — from browsing products, adding them to the cart, to completing secure online payments.  
+**Furniture Shop** is a full-stack web application that simulates an online shopping experience - from browsing products, adding them to the cart, to completing secure online payments.  
 The project includes both **client-side (user)** and **admin dashboard** applications for managing users, products, and orders.
 
 ---
