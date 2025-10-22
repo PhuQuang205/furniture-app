@@ -5,6 +5,13 @@ The project includes both **client-side (user)** and **admin dashboard** applica
 
 ---
 
+## 📂 Repositories
+
+- **Client (User App):** [https://github.com/PhuQuang205/furniture-app.git](https://github.com/PhuQuang205/furniture-app.git)  
+- **Admin Dashboard:** [https://github.com/PhuQuang205/furniture-admin-app.git](https://github.com/PhuQuang205/furniture-admin-app.git)
+- **Back-end**:[https://github.com/autdanttt/furniture-backend.git](https://github.com/autdanttt/furniture-backend.git)
+---
+
 ## 🚀 Features
 
 ### 🛍️ Client Application
@@ -47,13 +54,6 @@ The project includes both **client-side (user)** and **admin dashboard** applica
 - **Team size:** 3  
 - **Your role:** Front-end Developer (UI/UX Design, API integration, payment flow)
 
----
-
-## 📂 Repositories
-
-- **Client (User App):** [https://github.com/PhuQuang205/furniture-app.git](https://github.com/PhuQuang205/furniture-app.git)  
-- **Admin Dashboard:** [https://github.com/PhuQuang205/furniture-admin-app.git](https://github.com/PhuQuang205/furniture-admin-app.git)
-- **Back-end**:[https://github.com/autdanttt/furniture-backend.git](https://github.com/autdanttt/furniture-backend.git)
 ---
 
 ## 🧩 Getting Started
