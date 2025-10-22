@@ -96,29 +96,6 @@ export default function Checkout() {
 						alert("Không tạo được phiên thanh toán Stripe");
 						console.error("Stripe response:", data);
 					}
-				} else if (checkoutData.paymentMethod === "ZALOPAY") {
-					const res = await fetch(`${API_BASE}/zalopay/create`, {
-						method: "POST",
-						headers: {
-							"Content-Type": "application/json",
-						},
-						body: JSON.stringify({ orderId }),
-					});
-
-					if (!res.ok) {
-						const errText = await res.text();
-						throw new Error(`Stripe API lỗi: ${errText}`);
-					}
-
-					const data = await res.json();
-
-					if (data.order_url) {
-						// mở popup ZaloPay để thanh toán
-						// window.open(data.order_url, "_blank");
-						window.location.href = data.order_url;
-					} else {
-						toast.error("Không tạo được đơn ZaloPay");
-					}
 				}
 			} else {
 				toast.error("Khoong duoc thanh toan!");
