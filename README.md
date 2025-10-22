@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛋️ Furniture Shop — Fullstack E-Commerce Platform
 
-## Getting Started
+**Furniture Shop** is a full-stack web application that simulates an online shopping experience — from browsing products, adding them to the cart, to completing secure online payments.  
+The project includes both **client-side (user)** and **admin dashboard** applications for managing users, products, and orders.
 
-First, run the development server:
+---
+
+## 🚀 Features
+
+### 🛍️ Client Application
+- User authentication and authorization using **JWT + OAuth2**.
+- Product listing with **search, filter, and pagination**.
+- Product detail page with dynamic routing and image preview.
+- Shopping cart functionality: add, remove, and update product quantity.
+- Online payment integration using **ZaloPay** and **Stripe**.
+- Order management and checkout confirmation.
+- Responsive design built with **Tailwind CSS** and **shadcn/ui** components.
+- Cloudinary integration for image storage and optimization.
+
+### 🧑‍💼 Admin Dashboard
+- Manage **users, products, orders, and categories** through an intuitive dashboard.
+- CRUD operations with real-time data updates.
+- Role-based access control (Admin/User).
+- Secure API communication via JWT authentication.
+
+---
+
+## 🧠 Tech Stack
+
+**Frontend (Client):**
+- [Next.js (TypeScript)](https://nextjs.org)
+- Tailwind CSS, shadcn/ui
+- Axios for API integration
+- JWT Authentication
+- ZaloPay & Stripe payment gateway
+
+**Backend:**
+- Spring Boot, Spring Security, Spring Data JPA
+- RESTful API, MySQL
+- JWT, OAuth2, BCrypt
+- Cloudinary for image management
+- SMTP Mail (for verification and notifications)
+
+---
+
+## 🧑‍💻 Team
+- **Team size:** 3  
+- **Your role:** Front-end Developer (UI/UX Design, API integration, payment flow)
+
+---
+
+## 📂 Repositories
+
+- **Client (User App):** [https://github.com/PhuQuang205/furniture-app.git](https://github.com/PhuQuang205/furniture-app.git)  
+- **Admin Dashboard:** [https://github.com/PhuQuang205/furniture-admin-app.git](https://github.com/PhuQuang205/furniture-admin-app.git)
+- **Back-end**:[https://github.com/autdanttt/furniture-backend.git](https://github.com/autdanttt/furniture-backend.git)
+---
+
+## 🧩 Getting Started
+
+To run the development server locally:
 
 ```bash
+npm install
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

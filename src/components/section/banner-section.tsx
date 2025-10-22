@@ -14,31 +14,24 @@ import "swiper/css/navigation";
 const furnitureCategories = [
 	{
 		id: 1,
-		title: "Living Room",
-		items: "2,500+ Items",
+		title: "Phòng Khách",
+		items: "25+ Items",
 		price: "$1,500",
 		image: "/resource/bed-room/bed-room-blue.jpg",
 	},
 	{
 		id: 2,
-		title: "Bed Room",
-		items: "1,500+ Items",
+		title: "Phòng Ngủ",
+		items: "100+ Items",
 		price: "$1,200",
 		image: "/resource/bed-room/bed-room-gray.jpg",
 	},
 	{
 		id: 3,
-		title: "Dining Room",
-		items: "800+ Items",
+		title: "Phòng Bếp",
+		items: "200+ Items",
 		price: "$900",
 		image: "/resource/bed-room/bed-room-green.jpg",
-	},
-	{
-		id: 4,
-		title: "Dining Room",
-		items: "800+ Items",
-		price: "$900",
-		image: "/resource/bed-room/bed-room-ligh.jpg",
 	},
 ];
 
@@ -47,9 +40,9 @@ export const BannerSection = () => {
 	const [swiperInstance, setSwiperInstance] = useState<any>(null);
 
 	return (
-		<section className="relative bg-subbg py-16 lg:py-24">
+		<section className="relative bg-subbg py-16 lg:py-24 overflow-hidden">
 			<div className="container mx-auto px-8 lg:px-4">
-				<div className="flex flex-col lg:flex-row justify-between gap-16 overflow-hidden">
+				<div className="flex flex-col lg:flex-row justify-between gap-16">
 					<div className="space-y-8">
 						<div className="space-y-6">
 							<div className="inline-flex items-center px-4 py-2 rounded-full bg-white gap-2 ">
@@ -119,20 +112,20 @@ export const BannerSection = () => {
 								</div>
 							</div>
 							<div>
-								<div className="font-semibold text-gray-900">4.9 Ratings+</div>
+								<div className="font-semibold text-gray-900">4.9 Đáng giá+</div>
 								<div className="text-sm text-gray-600">
-									Trusted by 500+ Customers
+									Được 500+ khách hàng tin tưởng
 								</div>
 							</div>
 						</div>
 					</div>
 
-					<div className="flex flex-col overflow-hidden">
+					<div className="flex flex-col">
 						<div className="w-[800px]">
 							<Swiper
 								modules={[Navigation]}
 								spaceBetween={20}
-								slidesPerView={1.7}
+								slidesPerView={2}
 								onSwiper={setSwiperInstance}
 								className="furniture-hero-swiper"
 							>
@@ -140,7 +133,7 @@ export const BannerSection = () => {
 									<SwiperSlide key={category.id}>
 										<div className="relative rounded-xl bg-white border-2 border-gray-300 ">
 											<div className="flex-none">
-												<div className="overflow-hidden p-2">
+												<div className="p-2">
 													<Image
 														src={category.image}
 														alt={category.title}

@@ -108,22 +108,18 @@ export const OrderCard = ({ order }: PropOrder) => {
 						</p>
 					</div>
 				)}
-
-				{/* Hiển thị trạng thái xử lý đơn hàng */}
+				
 				<div className="mt-4">
 					{order.status === "NEW" && (
 						<p className="text-sm text-blue-600">
 							Đơn hàng của bạn đang chờ duyệt
 						</p>
 					)}
-					{order.status === "PROCESSING" && (
+					{order.status === "RETURN_REQUESTED" && (
 						<p className="text-sm text-orange-600">
-							Đơn hàng của bạn đang được xử lý
+							Đơn hàng của bạn yêu cầu hủy
 						</p>
-					)}
-					{order.status === "CANCELLED" && (
-						<p className="text-sm text-gray-500">Đơn hàng đã bị hủy</p>
-					)}
+					)}					
 				</div>
 
 				<div className="mt-8 flex justify-between items-center">
@@ -134,14 +130,14 @@ export const OrderCard = ({ order }: PropOrder) => {
 						<Button variant="outline">Hóa đơn</Button>
 					</div>
 
-					{order.paymentStatus === "PENDING" && (
+					{order.paymentStatus === "PENDING" && order.status !== "RETURN_REQUESTED" ? (
 						<Button
 							variant="empty"
 							className="cursor-pointer hover:bg-white/10"
 						>
 							Hủy đơn
 						</Button>
-					)}
+					): ""}
 				</div>
 			</div>
 		</div>

@@ -20,7 +20,11 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import BreadcrumbHeader from "@/components/breadcrumb-header";
 
 import { PROVINCES, Province } from "@/context/provinces";
-import { PAYMENT_METHODS, CheckoutData, orderItems } from "@/lib/services/orderService";
+import {
+	PAYMENT_METHODS,
+	CheckoutData,
+	orderItems,
+} from "@/lib/services/orderService";
 import { WARDS, Ward } from "@/context/wards";
 import {
 	getAllSummary,
@@ -29,9 +33,10 @@ import {
 } from "@/lib/services/orderService";
 import { CommitSection } from "@/components/section/commit-section";
 import { toast } from "sonner";
-
+import { checkoutServiceStripe } from "@/lib/services/checkoutService";
+const API_BASE = "http://localhost:80/api/checkout";
 export default function Checkout() {
-	const route = useRouter()
+	const route = useRouter();
 	const [sumary, setSumary] = useState<Summary | null>(null);
 	const [filteredWards, setFilteredWards] = useState<Ward[]>([]);
 	const [loading, setLoading] = useState(false);
@@ -54,15 +59,53 @@ export default function Checkout() {
 		setLoading(true);
 		try {
 			const res = await orderItems(checkoutData);
-			console.log(res)
-			if(res.status === 201){
-				route.push("/order")
-				toast.success("Order thành công!")
+
+			console.log("Response:", res);
+
+			if (res) {
+				const orderId = res.orderId;
+				route.push("/order");
+				toast.success("Tạo đơn hàng thành công!");
+
+				if (checkoutData.paymentMethod === "COD") {
+					route.push("/order");
+				}
+
+				// Nếu là thanh toán Stripe → chuyển sang trang chờ thanh toán hoặc redirect sang Stripe
+				else if (checkoutData.paymentMethod === "STRIPE") {
+					const res = await fetch(`${API_BASE}/stripe/create`, {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify(orderId),
+					});
+
+					if (!res.ok) {
+						const errText = await res.text();
+						throw new Error(`Stripe API lỗi: ${errText}`);
+					}
+
+					const data = await res.json();
+
+					if (data.url) {
+						// Chuyển hướng sang trang thanh toán Stripe
+						window.location.href = data.url;
+					} else {
+						alert("Không tạo được phiên thanh toán Stripe");
+						console.error("Stripe response:", data);
+					}
+				}
+			} else {
+				toast.error("Khoong duoc thanh toan!");
 			}
 		} catch (error) {
-			console.log("Error: ", error)
+			console.error("Error:", error);
+			toast.error("Đặt hàng thất bại!");
+		} finally {
+			setLoading(false);
 		}
-	}
+	};
 
 	const handleSelectWard = (val: string) => {
 		const ward = WARDS.find((item) => item.codename === val);
@@ -346,7 +389,7 @@ export default function Checkout() {
 						<div className="flex justify-between">
 							<span>Vận chuyển</span>
 							{loadingFee ? (
-								"Dang tinh ..."
+								"Đang tính ..."
 							) : (
 								<span>{shippingFee.toLocaleString()} VNĐ</span>
 							)}
@@ -355,8 +398,11 @@ export default function Checkout() {
 							<span>Tổng cộng</span>
 							<span>${total.toLocaleString()} VNĐ</span>
 						</div>
-						<Button className="mt-4 w-full h-12 rounded-full bg-greenly text-white hover:bg-greenly/90 cursor-pointer" onClick={handleOrder}>
-							<Link href="/order">Xác nhận thanh toán</Link>
+						<Button
+							className="mt-4 w-full h-12 rounded-full bg-greenly text-white hover:bg-greenly/90 cursor-pointer"
+							onClick={handleOrder}
+						>
+							Xác nhận thanh toán
 						</Button>
 					</CardContent>
 				</Card>
