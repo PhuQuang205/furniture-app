@@ -4,7 +4,11 @@ import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { toast } from "sonner";
 
-import { getProductById } from "@/lib/services/productService";
+import {
+	getAllProducts,
+	getProductById,
+	PropsProducts,
+} from "@/lib/services/productService";
 import { PropDetailProduct } from "@/lib/services/productService";
 
 import { CommitSection } from "@/components/section/commit-section";
@@ -15,6 +19,7 @@ import { ExploreProducts } from "@/components/ExploreProducts";
 const ProductDetail = () => {
 	const { id } = useParams();
 	const [product, setProduct] = useState<PropDetailProduct>();
+	const [related, setRelated] = useState<PropsProducts[]>([]);
 	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
@@ -33,6 +38,25 @@ const ProductDetail = () => {
 
 		if (id) fetchProduct();
 	}, [id]);
+
+	// 👉 Khi đã có product, gọi thêm để lấy sản phẩm liên quan
+	useEffect(() => {
+		const fetchRelated = async () => {
+			if (!product) return;
+			try {
+				const all = await getAllProducts();
+				console.log(all);
+				const filtered = all.data.filter(
+					(p: PropsProducts) => p.id !== product.id
+				);
+				setRelated(filtered);
+			} catch (error) {
+				console.error("Lỗi khi tải sản phẩm liên quan:", error);
+			}
+		};
+
+		fetchRelated();
+	}, [product]);
 
 	return (
 		<>
@@ -53,7 +77,7 @@ const ProductDetail = () => {
 			) : (
 				<DetailProductCard product={product} />
 			)}
-			<ExploreProducts />
+			<ExploreProducts products={related} />
 			<CommitSection />
 		</>
 	);

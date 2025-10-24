@@ -1,28 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { getAllProducts, PropsProducts } from "@/lib/services/productService";
+import { PropsProducts } from "@/lib/services/productService";
 import { CardProduct } from "@/components/CardProduct";
-export const ExploreProducts = () => {
-	const [products, setProducts] = useState<PropsProducts[]>([]);
-	const [loading, setLoading] = useState(false);
-	
-	useEffect(() => {
-		const fetchProduct = async () => {
-			setLoading(true);
-			try {
-				const res = await getAllProducts();
-				setProducts(res.data);
-			} catch (error) {
-				console.log("Error: ", error);
-			} finally {
-				setLoading(false);
-			}
-		};
 
-		fetchProduct();
-	}, []);
+interface ExploreProductsProps {
+	products: PropsProducts[];
+}
 
+export const ExploreProducts = ({ products }: ExploreProductsProps) => {
 	return (
 		<div className="container mx-auto">
 			<div className="py-8 lg:py-16 px-8 lg:px-4">
@@ -35,15 +20,19 @@ export const ExploreProducts = () => {
 						<span className="text-greenly">Khám phá</span> sản phẩm liên quan.
 					</h2>
 				</div>
+
+				{/* ✅ Hiển thị danh sách sản phẩm liên quan */}
 				<div className="flex overflow-x-scroll no-scrollbar">
 					<div className="flex-none flex gap-4">
-						{loading
-							? "Loading ..."
-							: products.map((product) => (
-									<div key={product.id} className="w-96">
-										<CardProduct product={product} />
-									</div>
-							  ))}
+						{products.length === 0 ? (
+							<p className="text-gray-500">Không có sản phẩm liên quan.</p>
+						) : (
+							products.map((product) => (
+								<div key={product.id} className="w-96">
+									<CardProduct product={product} />
+								</div>
+							))
+						)}
 					</div>
 				</div>
 			</div>

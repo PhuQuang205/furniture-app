@@ -9,7 +9,7 @@ export function FurnitureLogo({
 	active: boolean;
 }) {
 	return (
-		<div className={twMerge("flex items-center gap-2")}>
+		<div className={twMerge("flex items-center gap-1.5")}>
 			<div className="size-10 rounded-full flex items-center justify-center">
 				{active ? (
 					<Image
@@ -22,7 +22,7 @@ export function FurnitureLogo({
 					<Image src="/logo.png" alt="logo" width={500} height={500} />
 				)}
 			</div>
-			<h1 className={twMerge("text-xl font-bold text-black", className)}>
+			<h1 className={twMerge("text-xl font-bold text-black mb-2", className)}>
 				HoangHa<span className="text-yelly text-3xl">.</span>
 			</h1>
 		</div>
