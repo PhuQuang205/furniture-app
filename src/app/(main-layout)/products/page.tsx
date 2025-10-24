@@ -15,7 +15,8 @@ const ShopPage = () => {
 	const [products, setProducts] = useState<PropsProducts[]>([]);
 	const [loading, setLoading] = useState(false);
 	const [sortDir, setSortDir] = useState<"asc" | "desc" | null>(null);
-
+	console.log(products)
+	
 	useEffect(() => {
 		const fetchInitialProducts = async () => {
 			try {

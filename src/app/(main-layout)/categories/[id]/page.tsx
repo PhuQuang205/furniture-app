@@ -107,7 +107,7 @@ const DetailCategoty = () => {
 							pagination={{ clickable: true }}
 							className="!pb-8 category-swiper"
 						>
-							{categories.map((item) => (
+							{categories.filter((item) => item.id !== Number(id)).map((item) => (
 								<SwiperSlide key={item.id}>
 									<Link href={`/categories/${item.id}`} className="block">
 										<div className="flex flex-col gap-2 items-center cursor-pointer hover:opacity-90 transition">
