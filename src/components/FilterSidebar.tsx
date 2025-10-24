@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
-
 import { BrushCleaning } from "lucide-react";
 
 import { Checkbox } from "@/components/ui/checkbox";
@@ -11,7 +10,11 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
 
-import { filterProductsByCategory, getAllProducts } from "@/lib/services/productService";
+import {
+	filterProductsByCategory,
+	filterProductsByStock,
+	getAllProducts,
+} from "@/lib/services/productService";
 import { PropsCategory } from "@/lib/services/categoryService";
 import { getCategories } from "@/lib/services/categoryService";
 import { PropsProducts } from "@/lib/services/productService";
@@ -22,10 +25,8 @@ interface FilterSidebarProps {
 
 export function FilterSidebar({ onCheckedChange }: FilterSidebarProps) {
 	const [categories, setCategories] = useState<PropsCategory[]>([]);
-	const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(
-		null
-	);
-
+	const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(null);
+	const [stockFilter, setStockFilter] = useState<"in-stock" | "out-of-stock" | null>(null);
 	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
@@ -41,20 +42,16 @@ export function FilterSidebar({ onCheckedChange }: FilterSidebarProps) {
 				setLoading(false);
 			}
 		};
-
 		fetchCategories();
 	}, []);
 
-	
+	// 🔸 Lọc theo danh mục
 	const handleCategorySelect = async (categoryId: number) => {
 		try {
 			setSelectedCategoryId(categoryId);
 			setLoading(true);
-
 			const res = await filterProductsByCategory(categoryId);
-			console.log("res: ", res.data);
 			onCheckedChange(res.data);
-
 			toast.success("Đã lọc sản phẩm theo danh mục");
 		} catch (error) {
 			console.error("Lỗi khi lọc sản phẩm:", error);
@@ -64,27 +61,54 @@ export function FilterSidebar({ onCheckedChange }: FilterSidebarProps) {
 		}
 	};
 
+	// 🔸 Lọc theo tình trạng hàng
+	const handleStockFilterChange = async (value: "in-stock" | "out-of-stock") => {
+		try {
+			setStockFilter(value);
+			setLoading(true);
+
+			const inStock = value === "in-stock";
+			const res = await filterProductsByStock(inStock);
+			console.log(res)
+			onCheckedChange(res.data);
+
+			if(res) {
+				toast.success(
+				inStock ? "Đã lọc sản phẩm còn hàng" : "Đã lọc sản phẩm hết hàng"
+			);
+			}
+		} catch (error) {
+			console.error("Lỗi khi lọc theo tình trạng hàng:", error);
+			toast.error("Không thể lọc theo tình trạng hàng");
+		} finally {
+			setLoading(false);
+		}
+	};
+
+	// 🔸 Xoá tất cả bộ lọc
 	const handleClearFilters = async () => {
-	try {
-		setSelectedCategoryId(null);
-		setLoading(true);
+		try {
+			setSelectedCategoryId(null);
+			setStockFilter(null);
+			setLoading(true);
 
-		const res = await getAllProducts();
-		onCheckedChange(res.data);
+			const res = await getAllProducts();
+			onCheckedChange(res.data);
 
-		toast.success("Đã xoá bộ lọc");
-	} catch (error) {
-		console.error("Lỗi khi tải lại sản phẩm:", error);
-		toast.error("Không thể tải lại sản phẩm");
-	} finally {
-		setLoading(false);
-	}
-};
-
+			toast.success("Đã xoá tất cả bộ lọc");
+		} catch (error) {
+			console.error("Lỗi khi tải lại sản phẩm:", error);
+			toast.error("Không thể tải lại sản phẩm");
+		} finally {
+			setLoading(false);
+		}
+	};
 
 	return (
 		<aside className="w-64 space-y-6 rounded-lg bg-card p-6 relative">
 			<h2 className="text-lg font-semibold">Bộ lọc</h2>
+
+			{/* Danh mục */}
 			<div className="space-y-3">
 				<h3 className="text-sm font-medium">Danh mục</h3>
 				<div className="space-y-2">
@@ -96,11 +120,8 @@ export function FilterSidebar({ onCheckedChange }: FilterSidebarProps) {
 										id={`cat-${category.id}`}
 										checked={selectedCategoryId === category.id}
 										onCheckedChange={(checked) => {
-											if (checked) {
-												handleCategorySelect(category.id);
-											} else {
-												setSelectedCategoryId(null);
-											}
+											if (checked) handleCategorySelect(category.id);
+											else setSelectedCategoryId(null);
 										}}
 									/>
 									<Label
@@ -113,6 +134,8 @@ export function FilterSidebar({ onCheckedChange }: FilterSidebarProps) {
 						  ))}
 				</div>
 			</div>
+
+			{/* Khoảng giá (chưa triển khai) */}
 			<div className="space-y-3">
 				<h3 className="text-sm font-medium">Khoảng giá</h3>
 				<Slider />
@@ -121,11 +144,15 @@ export function FilterSidebar({ onCheckedChange }: FilterSidebarProps) {
 					<span>344</span>
 				</div>
 			</div>
+
+			{/* Tình trạng hàng */}
 			<div className="space-y-3">
 				<h3 className="text-sm font-medium">Tình trạng</h3>
 				<RadioGroup
-				// value={filters.availability || ""}
-				// onValueChange={(val) => handleChange("availability", val)}
+					value={stockFilter || ""}
+					onValueChange={(val) =>
+						handleStockFilterChange(val as "in-stock" | "out-of-stock")
+					}
 				>
 					<div className="flex items-center space-x-2">
 						<RadioGroupItem value="in-stock" id="in-stock" />
@@ -142,7 +169,8 @@ export function FilterSidebar({ onCheckedChange }: FilterSidebarProps) {
 				</RadioGroup>
 			</div>
 
-			<div className="absolute top-4 right-4 p-2 rounded-full w-fit flex items-center justify-center ">
+			{/* Nút xoá bộ lọc */}
+			<div className="absolute top-4 right-4">
 				<Button
 					className="size-9 rounded-xl"
 					variant="outline"
