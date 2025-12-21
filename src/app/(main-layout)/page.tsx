@@ -1,12 +1,14 @@
-import { BannerSection } from "@/components/section/banner-section";
-import { BlogSection } from "@/components/section/blog-section";
-import { CommitSection } from "@/components/section/commit-section";
-import { FaqsSection } from "@/components/section/faqs-section";
-import { IntroCategorySection } from "@/components/section/intro-category-section";
-import { IntroProductSection } from "@/components/section/intro-product-section";
-// import { TestimonialSection } from "@/components/section/testimonial-section";
-import { TextRunSection } from "@/components/section/text-run-section";
-import { TodayDealSection } from "@/components/section/today-deal-section";
+import {
+	BannerSection,
+	BlogSection,
+	CommitSection,
+	FaqsSection,
+	IntroCategorySection,
+	IntroProductSection,
+	TextRunSection,
+	TodayDealSection,
+	TestimonialSection,
+} from "@/components/section";
 
 export default function Home() {
 	return (
@@ -17,7 +19,7 @@ export default function Home() {
 			<IntroProductSection />
 			<TextRunSection />
 			<TodayDealSection />
-			{/* <TestimonialSection /> */}
+			<TestimonialSection />
 			<BlogSection />
 			<FaqsSection />
 		</>

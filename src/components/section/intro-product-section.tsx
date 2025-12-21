@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { CardProduct } from "@/components/CardProduct";
+import CardProduct from "@/components/CardProduct";
 import { getAllProducts } from "@/lib/services/productService";
 import { toast } from "sonner";
 import { PropsProducts } from "@/lib/services/productService";
@@ -15,7 +15,7 @@ const filters = [
 	"Featured Products",
 ];
 
-export const IntroProductSection = () => {
+const IntroProductSection = () => {
 	const [activeFilter, setActiveFilter] = useState("Latest Products");
 	const [products, setProducts] = useState<PropsProducts[]>([]);
 	const [loading, setLoading] = useState(true);
@@ -36,8 +36,8 @@ export const IntroProductSection = () => {
 		fetchProducts();
 	}, []);
 	return (
-		<section className="container mx-auto">
-			<div className="px-8 lg:px-4 py-8 lg:py-16">
+		<section className="overflow-hidden">
+			<div className="container mx-auto px-8 lg:px-4 py-8 lg:py-16">
 				<div className="flex items-center justify-between my-4">
 					<div className="space-y-4">
 						<div className="inline-flex items-center gap-2">
@@ -75,13 +75,16 @@ export const IntroProductSection = () => {
 						))}
 					</div>
 				</div>
-
-				<div className="flex overflow-x-scroll no-scrollbar">
-					<div className="flex-none flex gap-4">
+				{/* --- PHẦN PRODUCT --- */}
+				<div className="no-scrollbar overflow-x-auto lg:px-0 mx-[-2rem] sm:mx-[-2rem]">
+					<div className="flex gap-4 lg:flex-wrap lg:justify-between px-8">
 						{loading
 							? "Loading ..."
-							: products.map((product) => (
-									<div key={product.id} className="w-96">
+							: products.slice(0, 5).map((product) => (
+									<div
+										key={product.id}
+										className="flex-shrink-0 w-64 lg:flex-shrink lg:w-1/5 max-md:last:pr-8"
+									>
 										<CardProduct product={product} />
 									</div>
 							  ))}
@@ -91,3 +94,5 @@ export const IntroProductSection = () => {
 		</section>
 	);
 };
+
+export default IntroProductSection;

@@ -30,7 +30,7 @@ const contactInfo = {
 	address: `3502 Preston Rd. Inglewood, Maine 90380`,
 };
 
-export const FooterSection = () => {
+const FooterSection = () => {
 	return (
 		<footer className="bg-greenly text-white">
 			<div className="container mx-auto max-lg:px-4 py-8 lg:py-16">
@@ -47,7 +47,7 @@ export const FooterSection = () => {
 						<div className="flex gap-4">
 							<Button className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
 								<Facebook className="size-6" />
-							</Button>														
+							</Button>
 							<Button className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
 								<Instagram className="size-6" />
 							</Button>
@@ -171,3 +171,5 @@ export const FooterSection = () => {
 		</footer>
 	);
 };
+
+export default FooterSection;

@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { ARTICLES } from "@/context";
 import { CardBlog } from "@/components/CardBlog";
 
-export const BlogSection = () => {
+const BlogSection = () => {
 	return (
 		<section className="container mx-auto">
 			<div className="py-8 lg:py-16 px-8 lg:px-4">
@@ -29,8 +29,7 @@ export const BlogSection = () => {
 				<div className="flex overflow-x-scroll no-scrollbar">
 					<div className="flex-none flex gap-4 lg:gap-8">
 						{ARTICLES.map((article) => (
-							<CardBlog key={article.id} blog={article} 
-							className="w-[450px]"/>							
+							<CardBlog key={article.id} blog={article} className="w-[450px]" />
 						))}
 					</div>
 				</div>
@@ -38,3 +37,5 @@ export const BlogSection = () => {
 		</section>
 	);
 };
+
+export default BlogSection;

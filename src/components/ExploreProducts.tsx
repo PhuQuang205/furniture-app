@@ -1,7 +1,7 @@
 "use client";
 
 import { PropsProducts } from "@/lib/services/productService";
-import { CardProduct } from "@/components/CardProduct";
+import CardProduct from "@/components/CardProduct";
 
 interface ExploreProductsProps {
 	products: PropsProducts[];

@@ -6,12 +6,13 @@ import { Button } from "@/components/ui/button";
 import { Expand, Heart, Star } from "lucide-react";
 import { PropsProducts } from "@/lib/services/productService";
 import Link from "next/link";
+import { memo } from "react";
 
 export interface PropProduct {
 	product: PropsProducts;
 }
 
-export const CardProduct = ({ product }: PropProduct) => {
+const CardProduct = ({ product }: PropProduct) => {
 	const {
 		id,
 		name,
@@ -47,12 +48,6 @@ export const CardProduct = ({ product }: PropProduct) => {
 				>
 					<Expand className="size-5 text-black hover:text-white" />
 				</Button>
-				{/* <Button
-					variant="destructive"
-					className="size-8 bg-white rounded-full flex items-center justify-center cursor-pointer"
-				>
-					<ShoppingBag className="size-5 text-black" />
-				</Button> */}
 			</div>
 			<Link href={`/products/${id}`}>
 				<div className="aspect-square rounded-2xl overflow-hidden">
@@ -92,3 +87,5 @@ export const CardProduct = ({ product }: PropProduct) => {
 		</div>
 	);
 };
+
+export default memo(CardProduct);

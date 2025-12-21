@@ -3,7 +3,7 @@
 import { QuestionCard } from "@/components/QuestionCard";
 import { FAQDATA } from "@/context/index";
 
-export const FaqsSection = () => {
+const FaqsSection = () => {
 	return (
 		<section className="bg-white">
 			<div className="container mx-auto">
@@ -32,3 +32,5 @@ export const FaqsSection = () => {
 		</section>
 	);
 };
+
+export default FaqsSection;

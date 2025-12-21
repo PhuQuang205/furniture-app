@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import { toast } from "sonner";
 
 import BreadcrumbHeader from "@/components/breadcrumb-header";
-import { CommitSection } from "@/components/section/commit-section";
-import { CardProduct } from "@/components/CardProduct";
+import { CommitSection } from "@/components/section";
+import CardProduct from "@/components/CardProduct";
 import { getAllProducts, sortProducts } from "@/lib/services/productService";
 import { PropsProducts } from "@/lib/services/productService";
 import { ProductSort } from "@/components/ProductSort";
@@ -15,8 +15,8 @@ const ShopPage = () => {
 	const [products, setProducts] = useState<PropsProducts[]>([]);
 	const [loading, setLoading] = useState(false);
 	const [sortDir, setSortDir] = useState<"asc" | "desc" | null>(null);
-	console.log(products)
-	
+	console.log(products);
+
 	useEffect(() => {
 		const fetchInitialProducts = async () => {
 			try {
@@ -81,7 +81,9 @@ const ShopPage = () => {
 			/>
 			<div className="container mx-auto px-4 py-8">
 				<div className="flex gap-8">
-					<FilterSidebar onCheckedChange={(products) => setProducts(products)} />
+					<FilterSidebar
+						onCheckedChange={(products) => setProducts(products)}
+					/>
 					<div className="flex-1 space-y-6">
 						<ProductSort onSortChange={handleSortChange} />
 						<div className="grid gap-6 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">

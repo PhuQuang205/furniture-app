@@ -7,7 +7,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { useState } from "react";
 
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -35,7 +34,7 @@ const furnitureCategories = [
 	},
 ];
 
-export const BannerSection = () => {
+const BannerSection = () => {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const [swiperInstance, setSwiperInstance] = useState<any>(null);
 
@@ -187,3 +186,5 @@ export const BannerSection = () => {
 		</section>
 	);
 };
+
+export default BannerSection;

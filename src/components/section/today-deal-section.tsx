@@ -1,11 +1,10 @@
 import { CardDealProduct } from "@/components/CardDealProduct";
 import { DEALPRODUCTS } from "@/context";
 
-export const TodayDealSection = () => {
+const TodayDealSection = () => {
 	return (
 		<section className="container mx-auto">
 			<div className="py-8 lg:py-16 px-8 lg:px-4 overflow-clip">
-				{/* Phần tiêu đề */}
 				<div className="flex items-center justify-between my-4">
 					<div className="space-y-4">
 						<div className="inline-flex items-center gap-2">
@@ -26,12 +25,14 @@ export const TodayDealSection = () => {
 				{/* Phần sản phẩm */}
 				<div className="my-8 flex gap-4">
 					<div className="max-md:flex-none flex gap-4">
-						{DEALPRODUCTS.map((deal) => 
+						{DEALPRODUCTS.map((deal) => (
 							<CardDealProduct key={deal.id} deal={deal} />
-						)}
+						))}
 					</div>
 				</div>
 			</div>
 		</section>
 	);
 };
+
+export default TodayDealSection;

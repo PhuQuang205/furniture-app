@@ -12,7 +12,7 @@ const chairs = [
 const tables = ["Bàn tròn", "Bàn cổ điển", "Bàn hiện đại", "Bàn ăn"];
 const cabinets = ["Kệ gỗ", "Kệ nhựa", "Tủ quần áo", "Tủ trưng bày"];
 
-export const IntroCategorySection = () => {
+const IntroCategorySection = () => {
 	return (
 		<section className="container mx-auto">
 			<div className="px-6 lg:px-0 py-10 lg:py-16">
@@ -105,3 +105,5 @@ export const IntroCategorySection = () => {
 		</section>
 	);
 };
+
+export default IntroCategorySection;

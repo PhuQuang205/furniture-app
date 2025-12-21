@@ -1,7 +1,7 @@
 import { PARTNER } from "@/context/index";
 import Image from "next/image";
 
-export const TextRunSection = () => {
+const TextRunSection = () => {
 	return (
 		<div className="container mx-auto">
 			<div className="px-8 lg:px-4">
@@ -29,7 +29,7 @@ export const TextRunSection = () => {
 									alt={item.id.toString()}
 									className="w-auto h-auto"
 									width={200}
-									height={100}									
+									height={100}
 								/>
 							</div>
 						))}
@@ -39,3 +39,5 @@ export const TextRunSection = () => {
 		</div>
 	);
 };
+
+export default TextRunSection;
