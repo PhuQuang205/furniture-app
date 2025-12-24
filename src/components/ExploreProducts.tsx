@@ -7,7 +7,7 @@ interface ExploreProductsProps {
 	products: PropsProducts[];
 }
 
-export const ExploreProducts = ({ products }: ExploreProductsProps) => {
+const ExploreProducts = ({ products }: ExploreProductsProps) => {
 	return (
 		<div className="container mx-auto">
 			<div className="py-8 lg:py-16 px-8 lg:px-4">
@@ -39,3 +39,5 @@ export const ExploreProducts = ({ products }: ExploreProductsProps) => {
 		</div>
 	);
 };
+
+export default ExploreProducts;

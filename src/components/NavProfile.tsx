@@ -1,11 +1,11 @@
-'use client'
+"use client";
 
 import Link from "next/link";
 import { NAVITEMS } from "@/context/index";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
-export const NavProfile = () => {
+const NavProfile = () => {
 	const path = usePathname();
 
 	return (
@@ -14,7 +14,8 @@ export const NavProfile = () => {
 				<Link key={item.id} href={item.href} className="lg:w-[300px] w-full">
 					<div
 						className={cn(
-							"h-12 py-8 px-5 rounded-lg text-left flex items-center font-medium transition-all duration-300 w-full text-black cursor-pointer border border-gray-200", path === item.href ? "bg-yelly border-yellow-400": ""
+							"h-12 py-8 px-5 rounded-lg text-left flex items-center font-medium transition-all duration-300 w-full text-black cursor-pointer border border-gray-200",
+							path === item.href ? "bg-yelly border-yellow-400" : ""
 						)}
 					>
 						<p className="w-full text-md lg:text-lg">{item.name}</p>
@@ -24,3 +25,5 @@ export const NavProfile = () => {
 		</div>
 	);
 };
+
+export default NavProfile;

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/app/globals.css";
-import { HeroBanner } from "@/components/HeroBanner";
+import { HeroBanner } from "@/components";
 
 const inter = Inter({
 	variable: "--font-inter",
@@ -24,7 +24,9 @@ export default function RootLayout({
 			<body className={`${inter.variable} antialiased`}>
 				<div className="min-h-screen flex items-center justify-center">
 					<div className="flex w-[1300px] h-[900px]">
-						<div className="flex-1 flex items-center justify-center">{children}</div>
+						<div className="flex-1 flex items-center justify-center">
+							{children}
+						</div>
 						<div className="flex-1 hidden lg:flex items-center justify-start">
 							<HeroBanner />
 						</div>

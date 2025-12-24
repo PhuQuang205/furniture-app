@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { CustomerRequest, updateCustomer } from "@/lib/services/authService";
-import { PhotoUpload } from "@/components/photo-upload";
+import { PhotoUpload } from "@/components";
 import { Edit, X, CrossIcon } from "lucide-react";
 import {
 	Select,
@@ -50,18 +50,18 @@ export default function MyAccount() {
 	};
 
 	const handeSubmit = async () => {
-		setLoading(true) 
+		setLoading(true);
 		try {
-			const res = await updateCustomer(profile, avatar ?? undefined)
-			if(res.status === 200) {
-				toast.success("Cập nhật thông tin thành công!")
+			const res = await updateCustomer(profile, avatar ?? undefined);
+			if (res.status === 200) {
+				toast.success("Cập nhật thông tin thành công!");
 			}
 		} catch (error) {
-			console.log("error: ", error)
+			console.log("error: ", error);
 		} finally {
-			setLoading(false)
+			setLoading(false);
 		}
-	} 
+	};
 	return (
 		<div className="container mx-auto py-10 px-4">
 			<h2 className="text-2xl font-semibold mb-6">Thông tin tài khoản</h2>

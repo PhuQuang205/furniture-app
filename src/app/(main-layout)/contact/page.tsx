@@ -1,6 +1,6 @@
 import { CONTACT_INFO } from "@/context";
 import Link from "next/link";
-import { CommitSection } from "@/components/section/commit-section";
+import { CommitSection } from "@/components/section";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";

@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { ARTICLES } from "@/context";
-import { CardBlog } from "@/components/CardBlog";
+import { CardBlog } from "@/components";
 
 const BlogSection = () => {
 	return (

@@ -1,29 +1,30 @@
 "use client";
-
 import Link from "next/link";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { FurnitureLogo } from "@/components/FurnitureLogo";
+import { FurnitureLogo } from "@/components";
 import { toast } from "sonner";
 import { login } from "@/lib/services/authService";
 import { useRouter } from "next/navigation";
 
+const initFormState = { email: "", password: "" };
+
 const LoginPage = () => {
 	const router = useRouter();
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
+	const [formState, setFormState] = useState(initFormState);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
-	
+
 	const handleLogin = async (e: React.FormEvent) => {
 		e.preventDefault();
 		setLoading(true);
 		setError("");
 		try {
-			await login(email, password);
-			router.push("/");
+			console.log("formState: ", formState);
+			await login(formState);
+			router.replace("/");
 		} catch (err) {
 			toast.error("Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin.");
 			console.log(err);
@@ -56,8 +57,10 @@ const LoginPage = () => {
 							type="email"
 							placeholder="Nhập địa chỉ email"
 							className="h-12 border-gray-300 px-5"
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
+							value={formState.email}
+							onChange={(e) =>
+								setFormState({ ...formState, email: e.target.value })
+							}
 							required
 						/>
 					</div>
@@ -74,8 +77,10 @@ const LoginPage = () => {
 							type="password"
 							placeholder="Nhập mật khẩu"
 							className="h-12 px-5 border-gray-300"
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
+							value={formState.password}
+							onChange={(e) =>
+								setFormState({ ...formState, password: e.target.value })
+							}
 							required
 						/>
 					</div>

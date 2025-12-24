@@ -13,7 +13,7 @@ interface PropBlog {
 	className?: string;
 }
 
-export const CardBlog = ({ blog, className }: PropBlog) => {
+const CardBlog = ({ blog, className }: PropBlog) => {
 	return (
 		<div className={cn("w-full", className)}>
 			<div className="relative w-full h-[250px] md:h-[300px] lg:h-[350px] rounded-xl overflow-hidden">
@@ -48,3 +48,5 @@ export const CardBlog = ({ blog, className }: PropBlog) => {
 		</div>
 	);
 };
+
+export default CardBlog;

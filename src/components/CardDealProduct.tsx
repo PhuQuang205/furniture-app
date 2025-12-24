@@ -15,7 +15,7 @@ interface PropDeal {
 	};
 }
 
-export const CardDealProduct = ({ deal }: PropDeal) => {
+const CardDealProduct = ({ deal }: PropDeal) => {
 	return (
 		<div className="rounded-xl border border-gray-300 w-[450px] flex items-center justify-center">
 			<div className="px-2 py-4">
@@ -52,3 +52,5 @@ export const CardDealProduct = ({ deal }: PropDeal) => {
 		</div>
 	);
 };
+
+export default CardDealProduct;

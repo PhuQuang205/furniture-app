@@ -1,3 +1,4 @@
+"use client";
 import { FacebookIcon, Phone, YoutubeIcon } from "lucide-react";
 import Link from "next/link";
 
@@ -13,9 +14,11 @@ const TopHeaderSection = () => {
 						</p>
 					</div>
 					<div className="text-white text-sm hidden md:block">
-						Đăng ký và nhận giảm giá 25% cho đơn hàng đầu tiên của bạn:{" "}
+						<span>
+							Đăng ký và nhận giảm giá 25% cho đơn hàng đầu tiên của bạn:
+						</span>{" "}
 						<Link
-							href="https://example.com"
+							href="/register"
 							className="text-yelly underline underline-offset-4"
 						>
 							Đăng ký ngay

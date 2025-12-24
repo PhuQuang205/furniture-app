@@ -1,7 +1,5 @@
 "use client";
 
-// import { useDispatch } from "react-redux";
-
 import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -34,7 +32,6 @@ import { cn } from "@/lib/utils";
 import { PropDetailProduct } from "@/lib/services/productService";
 import { Badge } from "@/components/ui/badge";
 import { addToCart } from "@/lib/services/cartService";
-// import { addItem as addToCartAction } from "@/lib/redux/cartSlice";
 import { toast } from "sonner";
 
 interface DetailProductCardProps {
@@ -47,9 +44,7 @@ const tabs = [
 	{ key: "review", label: "Đánh giá" },
 ];
 
-export const DetailProductCard = ({ product }: DetailProductCardProps) => {
-	// const dispatch = useDispatch();
-
+const DetailProductCard = ({ product }: DetailProductCardProps) => {
 	const route = useRouter();
 	const [currentImage, setCurrentImage] = useState(0);
 	const [quantity, setQuantity] = useState(1);
@@ -348,3 +343,5 @@ export const DetailProductCard = ({ product }: DetailProductCardProps) => {
 		</div>
 	);
 };
+
+export default DetailProductCard;

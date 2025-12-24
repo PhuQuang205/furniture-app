@@ -1,4 +1,4 @@
-import { CardDealProduct } from "@/components/CardDealProduct";
+import { CardDealProduct } from "@/components";
 import { DEALPRODUCTS } from "@/context";
 
 const TodayDealSection = () => {

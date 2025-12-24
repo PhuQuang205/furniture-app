@@ -62,7 +62,7 @@ import { useEffect, useState } from "react";
 // 	},
 // ];
 
-export const OrderStatus = () => {
+const OrderStatus = () => {
 	const param = useParams();
 
 	const [tracking, setTracking] = useState<OrderTracking>();
@@ -92,9 +92,11 @@ export const OrderStatus = () => {
 
 			<div className="border-gray-300 border p-8 rounded-2xl">
 				<div className="relative">
-                    {
-                        tracking?.status === "RETURN_REQUESTED" && (<h1 className="text-3xl font-semibold">Đơn hàng của bạn yêu cầu được hủy</h1>)
-                    }
+					{tracking?.status === "RETURN_REQUESTED" && (
+						<h1 className="text-3xl font-semibold">
+							Đơn hàng của bạn yêu cầu được hủy
+						</h1>
+					)}
 					{/* <div className="absolute left-0 right-0 top-[30px] hidden h-0.5 bg-border md:block">
 						<div className="h-full w-[40%] bg-primary transition-all duration-500" />
 					</div>                     */}
@@ -149,3 +151,5 @@ export const OrderStatus = () => {
 		</div>
 	);
 };
+
+export default OrderStatus;

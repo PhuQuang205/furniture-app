@@ -23,10 +23,14 @@ interface FilterSidebarProps {
 	onCheckedChange: (products: PropsProducts[]) => void;
 }
 
-export function FilterSidebar({ onCheckedChange }: FilterSidebarProps) {
+const FilterSidebar = ({ onCheckedChange }: FilterSidebarProps) => {
 	const [categories, setCategories] = useState<PropsCategory[]>([]);
-	const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(null);
-	const [stockFilter, setStockFilter] = useState<"in-stock" | "out-of-stock" | null>(null);
+	const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(
+		null
+	);
+	const [stockFilter, setStockFilter] = useState<
+		"in-stock" | "out-of-stock" | null
+	>(null);
 	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
@@ -62,20 +66,22 @@ export function FilterSidebar({ onCheckedChange }: FilterSidebarProps) {
 	};
 
 	// 🔸 Lọc theo tình trạng hàng
-	const handleStockFilterChange = async (value: "in-stock" | "out-of-stock") => {
+	const handleStockFilterChange = async (
+		value: "in-stock" | "out-of-stock"
+	) => {
 		try {
 			setStockFilter(value);
 			setLoading(true);
 
 			const inStock = value === "in-stock";
 			const res = await filterProductsByStock(inStock);
-			console.log(res)
+			console.log(res);
 			onCheckedChange(res.data);
 
-			if(res) {
+			if (res) {
 				toast.success(
-				inStock ? "Đã lọc sản phẩm còn hàng" : "Đã lọc sản phẩm hết hàng"
-			);
+					inStock ? "Đã lọc sản phẩm còn hàng" : "Đã lọc sản phẩm hết hàng"
+				);
 			}
 		} catch (error) {
 			console.error("Lỗi khi lọc theo tình trạng hàng:", error);
@@ -181,4 +187,6 @@ export function FilterSidebar({ onCheckedChange }: FilterSidebarProps) {
 			</div>
 		</aside>
 	);
-}
+};
+
+export default FilterSidebar;

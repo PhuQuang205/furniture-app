@@ -12,11 +12,11 @@ interface PhotoUploadProps {
 	disabled?: boolean;
 }
 
-export function PhotoUpload({
+const PhotoUpload = ({
 	disabled,
 	onPhotoSelect,
 	initialImage,
-}: PhotoUploadProps) {
+}: PhotoUploadProps) => {
 	const [dragActive, setDragActive] = useState(false);
 	const [selectedPhoto, setSelectedPhoto] = useState<string | null>(
 		initialImage || null
@@ -113,4 +113,6 @@ export function PhotoUpload({
 			</div>
 		</div>
 	);
-}
+};
+
+export default PhotoUpload;

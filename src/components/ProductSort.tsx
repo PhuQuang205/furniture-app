@@ -12,7 +12,7 @@ interface ProductSortProps {
 	onSortChange: (value: string) => void;
 }
 
-export const ProductSort = ({ onSortChange }: ProductSortProps) => {
+const ProductSort = ({ onSortChange }: ProductSortProps) => {
 	return (
 		<div className="flex items-center justify-end mb-6">
 			<div className="flex items-center gap-2">
@@ -31,3 +31,5 @@ export const ProductSort = ({ onSortChange }: ProductSortProps) => {
 		</div>
 	);
 };
+
+export default ProductSort;

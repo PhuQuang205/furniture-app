@@ -5,7 +5,7 @@ import Image from "next/image";
 import { toast } from "sonner";
 
 import BreadcrumbHeader from "@/components/breadcrumb-header";
-import { CommitSection } from "@/components/section/commit-section";
+import { CommitSection } from "@/components/section";
 
 import { PropsCategory } from "@/lib/services/categoryService";
 import { getCategories } from "@/lib/services/categoryService";

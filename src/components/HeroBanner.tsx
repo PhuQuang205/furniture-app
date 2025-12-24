@@ -12,7 +12,7 @@ import "swiper/css/effect-fade";
 
 import { BANNER_CONTENT } from "@/context";
 
-export const HeroBanner = () => {
+const HeroBanner = () => {
 	const [activeIndex, setActiveIndex] = useState(0);
 
 	return (
@@ -74,3 +74,5 @@ export const HeroBanner = () => {
 		</div>
 	);
 };
+
+export default HeroBanner;

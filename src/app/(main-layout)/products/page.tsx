@@ -8,8 +8,7 @@ import { CommitSection } from "@/components/section";
 import CardProduct from "@/components/CardProduct";
 import { getAllProducts, sortProducts } from "@/lib/services/productService";
 import { PropsProducts } from "@/lib/services/productService";
-import { ProductSort } from "@/components/ProductSort";
-import { FilterSidebar } from "@/components/FilterSidebar";
+import { ProductSort, FilterSidebar } from "@/components";
 
 const ShopPage = () => {
 	const [products, setProducts] = useState<PropsProducts[]>([]);

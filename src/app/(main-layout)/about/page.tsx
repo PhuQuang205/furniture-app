@@ -1,4 +1,4 @@
-import { CommitSection } from "@/components/section/commit-section";
+import { CommitSection } from "@/components/section";
 import { STATS } from "@/context/index";
 import Image from "next/image";
 import BreadcrumbHeader from "@/components/breadcrumb-header";

@@ -7,6 +7,7 @@ import {
 } from "@/components/section";
 import { Toaster } from "@/components/ui/sonner";
 import "@/app/globals.css";
+import { AuthProvider } from "@/context/AuthContext";
 
 const inter = Inter({
 	variable: "--font-inter",
@@ -70,14 +71,14 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body
-				className={`${inter.variable} ${monsieur.variable} antialiased selection:bg-orange-100`}
-			>
-				<TopHeaderSection />
-				<HeaderSection />
-				<main className="min-h-screen">{children}</main>
-				<FooterSection />
-				<Toaster position="top-right" />
+			<body className={`${inter.variable} ${monsieur.variable} antialiased`}>
+				<AuthProvider>
+					<TopHeaderSection />
+					<HeaderSection />
+					<main className="min-h-screen">{children}</main>
+					<FooterSection />
+					<Toaster position="bottom-right" />
+				</AuthProvider>
 			</body>
 		</html>
 	);

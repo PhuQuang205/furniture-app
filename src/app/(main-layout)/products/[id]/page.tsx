@@ -11,10 +11,9 @@ import {
 } from "@/lib/services/productService";
 import { PropDetailProduct } from "@/lib/services/productService";
 
-import { CommitSection } from "@/components/section/commit-section";
+import { CommitSection } from "@/components/section";
 import BreadcrumbHeader from "@/components/breadcrumb-header";
-import { DetailProductCard } from "@/components/DetailProductCard";
-import { ExploreProducts } from "@/components/ExploreProducts";
+import { DetailProductCard, ExploreProducts } from "@/components";
 
 const ProductDetail = () => {
 	const { id } = useParams();
