@@ -134,6 +134,20 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
+  /* Fix lỗi slide tràn khi chưa load xong JS */
+  .furniture-hero-swiper .swiper-slide {
+    height: auto; /* Hoặc chiều cao cố định bạn muốn */
+    display: flex;
+  }
+
+  .furniture-hero-swiper {
+    visibility: hidden;
+  }
+
+  .furniture-hero-swiper.swiper-initialized {
+    visibility: visible;
+  }
 }
 
 @keyframes ping-small {
